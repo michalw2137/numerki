@@ -36,3 +36,6 @@ Działanie programu:
 
 	Co się dzieje, jeśli znak pochodnej nie jest stały na przedziale?
 	Zamieścić w sprawozdaniu przykład ilustrujący taką sytuację.
+
+Metoda siecznych:
+	https://pl.wikipedia.org/wiki/Metoda_siecznych
