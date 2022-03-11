@@ -1,4 +1,5 @@
 - funkcje:
+
 	- wielomian
 	- trygonometryczna
 	- wykładnicza
@@ -7,6 +8,7 @@
 	customowy wielomian - podajemy stopień i kolejne współczynniki
 	
 	przykłady:
+	
 		x^3 - x^2 -2x + 1 = 0
 		
 		2^x -3x = 0
