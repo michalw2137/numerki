@@ -1,6 +1,7 @@
 module com.example.zad1 {
     requires javafx.controls;
     requires javafx.fxml;
+    requires java.desktop;
 
 
     opens com.example.zad1 to javafx.fxml;

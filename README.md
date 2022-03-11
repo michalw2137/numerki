@@ -26,6 +26,9 @@ Działanie programu:
 	- wykonaj obliczenia metodą siecznych
 	
 	- podaj wyniki dla obu metod:
+	- zaznacz wyniki na wykresie
+
+
 		ile iteracji potrzeba do osiągnięcia zadanej dokładności
 		która jest szybsza?
 			- wybrano osiągnięcie epsilona: policz ilość iteracji
