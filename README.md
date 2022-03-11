@@ -8,11 +8,17 @@
 	
 	przykłady:
 		x^3 - x^2 -2x + 1 = 0
+		
 		2^x -3x = 0
+		
 		3x + sin(x) - e^x = 0
+		
 		x^3 -x + 1 = 0
+		
 		tg(x) - 1 = 0
+		
 		2 + cos(2x) = 0
+		
 		sin(x) - cos(x) = 0		 
 		
 Działanie programu:
