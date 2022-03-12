@@ -2,8 +2,6 @@ import functions.*;
 import org.junit.Test;
 import view.XYSeriesDemo;
 
-import java.sql.SQLOutput;
-
 import static org.junit.Assert.assertEquals;
 
 public class functionsTest {
@@ -28,7 +26,7 @@ public class functionsTest {
     }
 
     @Test
-    public void test2() {
+    public void testCalculatingValues() {
         Function polynomial = new FunctionPolynomial();
         Function exponential = new FunctionExponential();
         Function sine = new FunctionSine();
@@ -36,16 +34,22 @@ public class functionsTest {
         Function tangent = new FunctionTangent();
 
         var arguments = polynomial.calculateArgumentsIntoList(-10, 10);
-        var values = polynomial.calculateValuesIntoList(-10, 10);
-
         System.out.println(arguments);
         System.out.println();
 
-//        System.out.println(polynomial.calculateValuesIntoList(-10, 10));
-//        System.out.println(exponential.calculateValuesIntoList(-10, 10));
-//        System.out.println(sine.calculateValuesIntoList(-10, 10));
-//        System.out.println(cosine.calculateValuesIntoList(-10, 10));
-//        System.out.println(tangent.calculateValuesIntoList(-10, 10));
+        System.out.println(polynomial.calculateValuesIntoList(-10, 10));
+        System.out.println(exponential.calculateValuesIntoList(-10, 10));
+        System.out.println(sine.calculateValuesIntoList(-10, 10));
+        System.out.println(cosine.calculateValuesIntoList(-10, 10));
+        System.out.println(tangent.calculateValuesIntoList(-10, 10));
+    }
+
+    @Test
+    public void testGraph() {
+        Function polynomial = new FunctionPolynomial();
+
+        var arguments = polynomial.calculateArgumentsIntoList(-10, 10);
+        var values = polynomial.calculateValuesIntoList(-10, 10);
 
         XYSeriesDemo view = new XYSeriesDemo("Polynomial graph", arguments, values, 0);
         view.pack();

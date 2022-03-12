@@ -5,7 +5,7 @@ import static java.lang.Math.cos;
 public class FunctionCosine extends Function {
 
     public FunctionCosine() {
-        super("2 + cos(2x) = 0");
+        super("2 + cos(2x) = 0", -3, 3);
     }
 
     @Override
