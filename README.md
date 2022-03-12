@@ -24,6 +24,7 @@
 		sin(x) - cos(x) = 0		 
 		
 Działanie programu:
+
 	- wyświetl dostępne wzory funkcji i poproś o wybór
 	- pokaż wykres funkcji (???)
 	- zapytaj o wybranie zakresu - lewy i prawy kraniec
@@ -32,56 +33,6 @@ Działanie programu:
 	- zapytaj o ilość iteracji/wartość epsilona
 	- wykonaj obliczenia bisekcją
 	- wykonaj obliczenia metodą siecznych
-	
-	
-	
-	
-13:28
-fun liczIteracje(a, b):
-a = [a]
-b = [b]
-x = 0
-
-for i in range(ilosc_iteracji):
-
-licznik = fun(a[i]) * b[i] - fun(b[i]) * a[i]
-mianownik = fun(a[i]) - f(b[i-1]) # sus
-
-x = licznik / mianownik
-
-if fun(x) * fun(a[i]) > 0:
-a.append(x)
-b.append(b[i])
-
-if fun(x) * fun(b[i]) > 0:
-a.append(a)
-b.append(x)
-
-return x
-
-fun liczIteracje(a, b):
-a = [a]
-b = [b]
-x = 0
-
-i = 0
-while(fun(x) > epsilon)
-
-licznik = fun(a[i]) * b[i] - fun(b[i]) * a[i]
-mianownik = fun(a[i]) - f(b[i-1]) # sus
-
-x = licznik / mianownik
-
-if fun(x) * fun(a[i]) > 0:
-a.append(x)
-b.append(b[i])
-
-if fun(x) * fun(b[i]) > 0:
-a.append(a)
-b.append(x)
-
-i ++
-return x
 	
 	- podaj wyniki dla obu metod:
 		ile iteracji potrzeba do osiągnięcia zadanej dokładności
@@ -96,4 +47,57 @@ return x
 	Zamieścić w sprawozdaniu przykład ilustrujący taką sytuację.
 
 Metoda siecznych:
-	https://pl.wikipedia.org/wiki/Metoda_siecznych
+	https://pl.wikipedia.org/wiki/Metoda_siecznych	
+	
+	
+ pseudokod:
+ 
+- fun liczIteracje(a, b):
+	
+		a = [a]
+		b = [b]
+		x = 0
+		
+		for i in range(ilosc_iteracji):
+
+		licznik = fun(a[i]) * b[i] - fun(b[i]) * a[i]
+		mianownik = fun(a[i]) - f(b[i-1]) # sus
+
+		x = licznik / mianownik
+
+		if fun(x) * fun(a[i]) > 0:
+		a.append(x)
+		b.append(b[i])
+
+		if fun(x) * fun(b[i]) > 0:
+		a.append(a)
+		b.append(x)
+
+		return x
+
+- fun liczIteracje(a, b):
+
+		a = [a]
+		b = [b]
+		x = 0
+
+		i = 0
+		while(fun(x) > epsilon)
+
+		licznik = fun(a[i]) * b[i] - fun(b[i]) * a[i]
+		mianownik = fun(a[i]) - f(b[i-1]) # sus
+
+		x = licznik / mianownik
+
+		if fun(x) * fun(a[i]) > 0:
+		a.append(x)
+		b.append(b[i])
+
+		if fun(x) * fun(b[i]) > 0:
+		a.append(a)
+		b.append(x)
+
+		i ++
+		return x
+
+
