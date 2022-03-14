@@ -9,8 +9,9 @@ public class Main {
         showGraph(new FunctionPolynomial());
 //        showGraph(new FunctionExponential());
 //        showGraph(new FunctionSine());
-//        showGraph(new FunctionCosine());    // TODO: fix cosine, doesnt have solutions
+//        showGraph(new FunctionCosine());    // TODO: cosine is supposed to do dumb things
 //        showGraph(new FunctionTangent());
+
 //        try {
 //            Controller.startApp();
 //        } catch (IOException e) {
