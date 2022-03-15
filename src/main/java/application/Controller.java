@@ -2,6 +2,7 @@ package application;
 
 import functions.*;
 import numeric_methods.Bisection;
+import numeric_methods.Secant;
 import view.XYSeriesDemo;
 
 import java.io.IOException;
@@ -40,17 +41,33 @@ public class Controller {
             System.out.println();
         }while(function.fun(left) * function.fun(right) > 0);
 
-        System.out.println("Enter number of iterations:");
-        int iterations = scan.nextInt();
-        double solution = Bisection.Iterations(function, left, right, iterations);
-        System.out.println("Solution found in 10 iterations = " + solution);
-        System.out.println("Enter Epsilon:");
-        double epsilon = scan.nextDouble();
-        solution = Bisection.Approximity(function, left, right, epsilon);
-        System.out.println("Solution found when delta reached 0.001 = " + solution);
-        System.out.println();
+        int decision = 0;
+        do {
+            System.out.println("Use number of iterations(1) or epsilon(2) ?");
+            decision = scan.nextInt();
+        }while((decision != 1) && (decision != 2));
 
-        System.out.println("Wolfram alpha: x0 = -1,247");
+        if (decision == 1) {
+            System.out.println("Enter number of iterations:");
+            int iterations = scan.nextInt();
+                double solutionB = Bisection.Iterations(function, left, right, iterations);
+                System.out.println("Solution (bisection) found in 10 iterations = " + solutionB);
+
+                double solutionS = Secant.Iterations(function, left, right, iterations);
+                System.out.println("Solution (secant) found in 10 iterations = " + solutionS);
+
+
+        }
+        else {
+            System.out.println("Enter Epsilon:");
+            double epsilon = scan.nextDouble();
+                double solutionB = Bisection.Approximity(function, left, right, epsilon);
+                System.out.println("Solution (bisection) found when delta reached 0.001 = " + solutionB);
+                double solutionS = Secant.Approximity(function, left, right, epsilon);
+                System.out.println("Solution (secant) found when delta reached 0.001 = " + solutionS);
+            }
+
+        System.out.println();
 
         // TODO: possibly loop program for multiple inputs, quit on user input
         // TODO: split into functions?

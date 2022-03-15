@@ -6,17 +6,17 @@ import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) {    // działa jeden na raz, odkomentowuj pojedynczo
-        showGraph(new FunctionPolynomial());
+//        showGraph(new FunctionPolynomial());
 //        showGraph(new FunctionExponential());
 //        showGraph(new FunctionSine());
 //        showGraph(new FunctionCosine());    // TODO: cosine is supposed to do dumb things
 //        showGraph(new FunctionTangent());
-
-//        try {
-//            Controller.startApp();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
+//
+        try {
+            Controller.startApp();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 
