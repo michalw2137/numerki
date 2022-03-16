@@ -29,9 +29,10 @@ public class Secant {
 
         int i = 0;
         double x0 = -1;
-        while (abs(x.get(x.size()-2) - x.get(x.size()-1)) > Epsilon)
-        {
+        while (abs(x.get(x.size()-2) - x.get(x.size()-1)) > Epsilon) {
             x0 = right - f.fun(right) * (right - left) / (f.fun(right) - f.fun(left));
+            x.add(x0);
+
             left = right;
             right = x0;
             i++;
