@@ -9,7 +9,7 @@ public class Main {
 //        showGraph(new FunctionPolynomial());
 //        showGraph(new FunctionExponential());
 //        showGraph(new FunctionSine());
-//        showGraph(new FunctionCosine());    // TODO: cosine is supposed to do dumb things
+//        showGraph(new FunctionCosine());
 //        showGraph(new FunctionTangent());
 //
         try {

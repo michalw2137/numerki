@@ -4,12 +4,14 @@ public class FunctionPolynomial extends Function {
 
 
     public FunctionPolynomial() {
-        super("x^3 - x^2 -2x + 1 = 0", -1.5, 2);
+        super("x^3 - x^2 -2x + 1 = 0", -3, 3);
     }
 
     @Override
     public double fun(double x) {
-        return (x*x*x) - (x*x) - (2*x) + 1; // TODO: zapisać to schematem Hornera
+        int[] tab = {1,-1,-2,1};
+        return x*x*x - x*x - 2*x + 1;
+        //return horner(tab, tab.length, x); // TODO: zapisać to schematem Hornera
                                         // 1 + x(-2 + x(x -1)) coś takiego? double check
     }
 }

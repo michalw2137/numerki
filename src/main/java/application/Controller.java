@@ -37,9 +37,9 @@ public class Controller {
                     right = scan.nextDouble();
                 } while (right > function.getGraphRight());
             } while (left > right);
-            System.out.println("left = " + left + ", right = " + right);
-            System.out.println();
         }while(function.fun(left) * function.fun(right) > 0);
+        System.out.println("left = " + left + ", right = " + right);
+        System.out.println();
 
         int decision = 0;
         do {
@@ -50,22 +50,16 @@ public class Controller {
         if (decision == 1) {
             System.out.println("Enter number of iterations:");
             int iterations = scan.nextInt();
-                double solutionB = Bisection.Iterations(function, left, right, iterations);
-                System.out.println("Solution (bisection) found in 10 iterations = " + solutionB);
 
-                double solutionS = Secant.Iterations(function, left, right, iterations);
-                System.out.println("Solution (secant) found in 10 iterations = " + solutionS);
-
+            showResultsIt(left, right, function, iterations);
 
         }
         else {
             System.out.println("Enter Epsilon:");
             double epsilon = scan.nextDouble();
-                double solutionB = Bisection.Approximity(function, left, right, epsilon);
-                System.out.println("Solution (bisection) found when delta reached 0.001 = " + solutionB);
-                double solutionS = Secant.Approximity(function, left, right, epsilon);
-                System.out.println("Solution (secant) found when delta reached 0.001 = " + solutionS);
-            }
+
+            showResultsAp(left, right, function, epsilon);
+        }
 
         System.out.println();
 
@@ -74,6 +68,37 @@ public class Controller {
 
         // TODO: implement another algorithm
         // TODO: store/process results in a friendly way, check report requirements
+    }
+
+
+    static void showResultsIt(double left, double right, Function function, int iterations) {
+        var arguments = function.calculateArgumentsIntoList(left, right);
+        var values = function.calculateValuesIntoList(left, right);
+
+        double solutionS = Bisection.Iterations(function, left, right, iterations);
+        XYSeriesDemo view = new XYSeriesDemo("bisekcji " + function.getFormula(), arguments, values, solutionS);
+        view.pack();
+        view.setVisible(true);
+
+        double solutionB = Secant.Iterations(function, left, right, iterations);
+        XYSeriesDemo view2 = new XYSeriesDemo("siecznych " + function.getFormula(), arguments, values, solutionB);
+        view2.pack();
+        view2.setVisible(true);
+    }
+
+    static void showResultsAp(double left, double right, Function function, double epsilon) {
+        var arguments = function.calculateArgumentsIntoList(left, right);
+        var values = function.calculateValuesIntoList(left, right);
+
+        double solutionS = Bisection.Approximity(function, left, right, epsilon);
+        XYSeriesDemo view = new XYSeriesDemo("bisekcji " + function.getFormula(), arguments, values, solutionS);
+        view.pack();
+        view.setVisible(true);
+
+        double solutionB = Secant.Approximity(function, left, right, epsilon);
+        XYSeriesDemo view2 = new XYSeriesDemo("siecznych " + function.getFormula(), arguments, values, solutionB);
+        view2.pack();
+        view2.setVisible(true);
     }
 
     static Function chooseFunction() throws IOException {

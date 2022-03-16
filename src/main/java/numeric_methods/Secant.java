@@ -4,36 +4,39 @@ import functions.Function;
 
 import java.util.ArrayList;
 
+import static java.lang.Math.abs;
+
 public class Secant {
 
-    public static double Iterations(Function f, double a, double b, int iterations) {
+    public static double Iterations(Function f, double left, double right, int iterations) {
         int i = 0;
-        double x;
-        while ((i<iterations) && (a!=b))
-        {
-            x =b- f.fun(b) *(b-a)/(f.fun(b)-f.fun(a));
-            a=b;
-            b=x;
+        double x0 = 0;
+        while ((i < iterations) && (left != right)) {
+            x0 = right - f.fun(right) * (right - left) / (f.fun(right) - f.fun(left));
+            left = right;
+            right = x0;
             i++;
         }
-        return b;
+        System.out.println("Secant: x0 = " + x0);
+
+        return right;
     }
 
-    public static double Approximity(Function f, double a, double b, double Epsilon) {
-        ArrayList<Double> x = new ArrayList<Double>();
+    public static double Approximity(Function f, double left, double right, double Epsilon) {
+        ArrayList<Double> x = new ArrayList<>();
         x.add(1000.0);
         x.add(500.0);
 
         int i = 0;
         double x0 = -1;
-        while ((Math.abs(b-a)>Epsilon) && (a!=b))
+        while (abs(x.get(x.size()-2) - x.get(x.size()-1)) > Epsilon)
         {
-            x0 =b- f.fun(b) *(b-a)/(f.fun(b)-f.fun(a));
-            a=b;
-            b=x0;
+            x0 = right - f.fun(right) * (right - left) / (f.fun(right) - f.fun(left));
+            left = right;
+            right = x0;
             i++;
         }
-        System.out.println("Epsilon reached in " + i + " iterations");
+        System.out.println("Secant: Epsilon reached in " + i + " iterations, x0 = " + x0);
 
         return x0;
     }
