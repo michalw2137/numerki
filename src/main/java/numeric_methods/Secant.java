@@ -37,7 +37,7 @@ public class Secant {
             right = x0;
             i++;
         }
-        System.out.println("Secant: Epsilon reached in " + i + " iterations, x0 = " + x0);
+        System.out.println("Secant: " + i + " iterations, x0 = " + x0);
 
         return x0;
     }

@@ -3,10 +3,8 @@ package application;
 import functions.*;
 import numeric_methods.Bisection;
 import numeric_methods.Secant;
-import view.XYSeriesDemo;
 
 import java.io.IOException;
-import java.util.Objects;
 import java.util.Scanner;
 
 public class Controller {
@@ -24,15 +22,17 @@ public class Controller {
     public static void startApp() throws RuntimeException{
         chooseFunction();
 
-        showGraph(function.getGraphLeft(), function.getGraphRight(), 0);
+        function.showGraph("", function.getGraphLeft(), function.getGraphRight(), 0 );
 
-        readEdges(function);
+        readEdges();
 
         readEndingCondition();
 
         readEndingValue();
 
-        showResults(left, right, function, solutionB, solutionS);
+        calculateSolutions();
+
+        showResults();
 
         System.out.println();
     }
@@ -80,24 +80,31 @@ public class Controller {
         }
     }
 
-    private static void showGraph (double left, double right, double zero) {
-        var arguments = function.calculateArgumentsIntoList(left, right);
-        var values = function.calculateValuesIntoList(function.getGraphLeft(), function.getGraphRight());
-
-        XYSeriesDemo view = new XYSeriesDemo(function.getFormula(), arguments, values, zero);
-        view.pack();
-        view.setVisible(true);
+    private static void readEdges() {
+        while (true) {
+            try {
+                tryToReadEdges();
+                return;
+            } catch (IOException | RuntimeException e) {
+                System.out.println(e.getMessage() + '\n');
+            }
+        }
     }
 
-    private static void readEdges(Function function) {
-        do {
-            System.out.print("Enter left edge: ");
-            left = scanner.nextDouble();
+    private static void tryToReadEdges () throws IOException, RuntimeException {
+        System.out.print("Enter left edge: ");
+        left = scanner.nextDouble();
 
-            System.out.print("Enter right edge: ");
-            right = scanner.nextDouble();
-        } while( function.fun(left) * function.fun(right) > 0 &&
-                left >= right);
+        System.out.print("Enter right edge: ");
+        right = scanner.nextDouble();
+
+        if (left >= right) {
+            throw new IOException("Invalid range!");
+        }
+         if( function.fun(left) * function.fun(right) > 0) {
+             throw new RuntimeException("Same sign edges!");
+         }
+
         System.out.println("\nselected range: <" + left + ", " + right + ">");
         System.out.println();
 
@@ -113,29 +120,30 @@ public class Controller {
         if (endByApproximation) {
             System.out.println("Enter epsilon: ");
             epsilon = scanner.nextDouble();
-            solutionS = Bisection.Approximity(function, left, right, epsilon);
-            solutionB = Secant.Approximity(function, left, right, epsilon);
-
 
         } else {
             System.out.println("Enter number of iterations: ");
             iterations = scanner.nextInt();
+        }
+    }
+
+    public static void calculateSolutions () {
+        if (endByApproximation) {
+            solutionS = Bisection.Approximity(function, left, right, epsilon);
+            solutionB = Secant.Approximity(function, left, right, epsilon);
+
+        } else {
             solutionS = Bisection.Iterations(function, left, right, iterations);
             solutionB = Secant.Iterations(function, left, right, iterations);
         }
     }
 
-    static void showResults(double left, double right, Function function, double solutionB, double solutionS) {
+    public static void showResults() {
         var arguments = function.calculateArgumentsIntoList(left, right);
         var values = function.calculateValuesIntoList(left, right);
 
-        XYSeriesDemo view = new XYSeriesDemo("bisekcji ", arguments, values, solutionB);
-        view.pack();
-        view.setVisible(true);
-
-        XYSeriesDemo view2 = new XYSeriesDemo("siecznych ", arguments, values, solutionS);
-        view2.pack();
-        view2.setVisible(true);
+        function.showGraph(" bisection", left, right, solutionB);
+        function.showGraph(" secant", left, right, solutionS);
     }
 
 
@@ -143,27 +151,29 @@ public class Controller {
         Controller.function = function;
     }
 
-    public static void setLeft (double left) {
+    public static void setRange(double left, double right) {
+        if( function.fun(left) * function.fun(right) > 0) {
+            throw new RuntimeException("Same sign edges!");
+        }
         Controller.left = left;
-    }
-
-    public static void setRight (double right) {
         Controller.right = right;
     }
 
-    public static void endByEpsilon () {
-        Controller.endByApproximation = true;
-    }
-
-    public static void endByIteratios () {
-        Controller.endByApproximation = false;
-    }
-
     public static void setIterations (int iterations) {
+        Controller.endByApproximation = false;
         Controller.iterations = iterations;
     }
 
     public static void setEpsilon (double epsilon) {
+        Controller.endByApproximation = true;
         Controller.epsilon = epsilon;
+    }
+
+    public static double getSolutionS () {
+        return solutionS;
+    }
+
+    public static double getSolutionB () {
+        return solutionB;
     }
 }

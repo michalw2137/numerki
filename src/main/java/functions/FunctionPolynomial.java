@@ -10,8 +10,7 @@ public class FunctionPolynomial extends Function {
     @Override
     public double fun(double x) {
         int[] tab = {1,-1,-2,1};
-        return x*x*x - x*x - 2*x + 1;
-        //return horner(tab, tab.length, x); // TODO: zapisać to schematem Hornera
-                                        // 1 + x(-2 + x(x -1)) coś takiego? double check
+//        return x*x*x - x*x - 2*x + 1;
+        return horner(tab, tab.length, x);
     }
 }

@@ -1,5 +1,7 @@
 package functions;
 
+import view.XYSeriesDemo;
+
 import java.util.ArrayList;
 
 public abstract class Function {
@@ -53,15 +55,37 @@ public abstract class Function {
         return arguments;
     }
 
+    public void showGraph() {
+        var arguments = calculateArgumentsIntoList(getGraphLeft(), getGraphRight());
+        var values = calculateValuesIntoList(getGraphLeft(), getGraphRight());
+
+        XYSeriesDemo view = new XYSeriesDemo(getFormula(), arguments, values, 0);
+        view.pack();
+        view.setVisible(true);
+
+    }
+
+    public void showGraph(String name, double left, double right, double zero) {
+        var arguments = calculateArgumentsIntoList(left, right);
+        var values = calculateValuesIntoList(left, right);
+
+        XYSeriesDemo view = new XYSeriesDemo(getFormula() + ' ' + name, arguments, values, zero);
+        view.pack();
+        view.setVisible(true);
+
+    }
+
     static double horner(int[] poly, int n, double x)
     {
         // Initialize result
         double result = poly[0];
 
         // Evaluate value of polynomial using Horner's method
-        for (int i=1; i<n; i++)
-            result = result*x + poly[i];
+        for (int i = 1; i < n; i++)
+            result = result * x + poly[i];
 
         return result;
     }
+
+
 }
