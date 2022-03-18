@@ -1,33 +1,33 @@
 package functions;
 
+import view.XYSeriesDemo;
+
 import java.util.ArrayList;
 
 public abstract class Function {
     public abstract double fun(double x);
 
     private final String formula;       // plain text, used as a label
-    private final double graphLeft;     // left most graph edge
-    private final double graphRight;    // right most graph edge
+    private final double left, right;     // left, right most graph edge
+    private double increment = 0.1;
 
-    protected Function(String formula, double graphLeft, double graphRight) {
+    protected Function(String formula, double left, double right) {
         this.formula = formula;
-        this.graphLeft = graphLeft;
-        this.graphRight = graphRight;
+        this.left = left;
+        this.right = right;
     }
 
     public String getFormula() {
         return formula;
     }
 
-    public double getGraphLeft() {
-        return graphLeft;
+    public double getLeft () {
+        return left;
     }
 
-    public double getGraphRight() {
-        return graphRight;
+    public double getRight () {
+        return right;
     }
-
-    private double increment = 0.1;
 
     public void setIncrement(double increment) {
         this.increment = increment;
@@ -52,4 +52,33 @@ public abstract class Function {
         }
         return arguments;
     }
+
+    public void showGraph() {
+        var arguments = calculateArgumentsIntoList(getLeft(), getRight());
+        var values = calculateValuesIntoList(getLeft(), getRight());
+
+        XYSeriesDemo view = new XYSeriesDemo(getFormula(), arguments, values, 0);
+        view.pack();
+        view.setVisible(true);
+    }
+
+    public void showGraph(String name, double left, double right, double zero) {
+        var arguments = calculateArgumentsIntoList(left, right);
+        var values = calculateValuesIntoList(left, right);
+
+        XYSeriesDemo view = new XYSeriesDemo(getFormula() + ' ' + name, arguments, values, zero);
+        view.pack();
+        view.setVisible(true);
+    }
+
+    static double horner(int[] poly, int n, double x) {
+        double result = poly[0];
+
+        for (int i = 1; i < n; i++)
+            result = result * x + poly[i];
+
+        return result;
+    }
+
+
 }

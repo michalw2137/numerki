@@ -5,7 +5,7 @@ import static java.lang.Math.tan;
 public class FunctionTangent extends Function {
     public FunctionTangent() {
         super("tg(x) - 1 = 0", -1.5, 1.5);
-        super.setIncrement(0.01); // TODO: find optimal value - nice graph, but minimal calculations
+        super.setIncrement(0.02);
     }
 
     @Override

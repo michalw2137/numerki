@@ -6,11 +6,8 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="zad1" />
+        <module name="numerki" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="zad1" target="17" />
-    </bytecodeTargetLevel>
   </component>
 </project>

@@ -2,100 +2,177 @@ package application;
 
 import functions.*;
 import numeric_methods.Bisection;
-import view.XYSeriesDemo;
+import numeric_methods.Secant;
 
 import java.io.IOException;
 import java.util.Scanner;
 
 public class Controller {
 
-    public static void startApp() throws IOException {
+    private static double left, right;
+    private static Function function;
+    private static boolean endByApproximation = false;
+    private static int iterations = 10;
+    private static double epsilon = 0.001;
+    private static double solutionS, solutionB;
 
-        Function function;
+    private static final Scanner scanner = new Scanner(System.in);
 
-        function = chooseFunction();
+    public static void startApp() throws RuntimeException{
+        chooseFunction();
 
-        var arguments = function.calculateArgumentsIntoList(function.getGraphLeft(), function.getGraphRight());
-        var values = function.calculateValuesIntoList(function.getGraphLeft(), function.getGraphRight());
+        function.showGraph("", function.getLeft(), function.getRight(), 0 );
 
-        XYSeriesDemo view = new XYSeriesDemo(function.getFormula(), arguments, values, 0);
-        view.pack();
-        view.setVisible(true);
+        readEdges();
 
+        readEndingCondition();
 
-        double left, right;
-        Scanner scan = new Scanner( System.in );
-        do {
-            do {
-                do {
-                    System.out.print("Enter left edge:");
-                    left = scan.nextDouble();
-                } while (left < function.getGraphLeft());
-                do {
-                    System.out.print("Enter right edge:");
-                    right = scan.nextDouble();
-                } while (right > function.getGraphRight());
-            } while (left > right);
-            System.out.println("left = " + left + ", right = " + right);
-            System.out.println();
-        }while(function.fun(left) * function.fun(right) > 0);
+        readEndingValue();
 
-        System.out.println("Enter number of iterations:");
-        int iterations = scan.nextInt();
-        double solution = Bisection.Iterations(function, left, right, iterations);
-        System.out.println("Solution found in 10 iterations = " + solution);
-        System.out.println("Enter Epsilon:");
-        double epsilon = scan.nextDouble();
-        solution = Bisection.Approximity(function, left, right, epsilon);
-        System.out.println("Solution found when delta reached 0.001 = " + solution);
+        calculateSolutions();
+
+        showResults();
+
         System.out.println();
-
-        System.out.println("Wolfram alpha: x0 = -1,247");
-
-        // TODO: possibly loop program for multiple inputs, quit on user input
-        // TODO: split into functions?
-
-        // TODO: implement another algorithm
-        // TODO: store/process results in a friendly way, check report requirements
     }
 
-    static Function chooseFunction() throws IOException {
+    static void chooseFunction() throws RuntimeException{
         System.out.println("CHOOSE FUNCTION:");
-        System.out.println("1) " + new FunctionPolynomial().getFormula());
-        System.out.println("2) " + new FunctionExponential().getFormula());
-        System.out.println("3) " + new FunctionSine().getFormula());
-        System.out.println("4) " + new FunctionCosine().getFormula());
-        System.out.println("5) " + new FunctionTangent().getFormula());
-
-        System.out.print("Your choice (1-5): ");
-        boolean repeat = false;
-        do {
-            int choice = System.in.read();
-            switch (choice - 48) {
+        System.out.println( "1) " + new FunctionPolynomial().getFormula() + "\n" +
+                            "2) " + new FunctionExponential().getFormula() + "\n" +
+                            "3) " + new FunctionSine().getFormula() + "\n" +
+                            "4) " + new FunctionCosine().getFormula() + "\n" +
+                            "5) " + new FunctionTangent().getFormula()  + "\n" +
+                            "9) exit \n\n" +
+                            "Your choice (1-5): ");
+        while(true) {
+            int choice = scanner.nextInt();
+            switch (choice) {
                 case 1 -> {
-                    return new FunctionPolynomial();
+                    function = new FunctionPolynomial();
+                    return;
                 }
                 case 2 -> {
-                    return new FunctionExponential();
+                    function = new FunctionExponential();
+                    return;
                 }
                 case 3 -> {
-                    return new FunctionSine();
+                    function = new FunctionSine();
+                    return;
                 }
                 case 4 -> {
-                    return new FunctionCosine();
+                    function = new FunctionCosine();
+                    return;
                 }
                 case 5 -> {
-                    return new FunctionTangent();
+                    function = new FunctionTangent();
+                    return;
+                }
+                case 9 -> {
+                    throw new RuntimeException("Program ended by user");
                 }
                 default -> {
-                    System.out.println("CHOOSE CORRECT ONE!");
-                    System.out.println("Your choice (1-5): ");
-                    repeat = true;
+                    System.out.println( "CHOOSE CORRECT ONE!" + '\n' +
+                                        "Your choice (1-5): ");
                 }
             }
-        }while (repeat);
-        return new FunctionPolynomial();
+        }
+    }
+
+    private static void readEdges() {
+        while (true) {
+            try {
+                tryToReadEdges();
+                return;
+            } catch (IOException | RuntimeException e) {
+                System.out.println(e.getMessage() + '\n');
+            }
+        }
+    }
+
+    private static void tryToReadEdges () throws IOException, RuntimeException {
+        System.out.print("Enter left edge: ");
+        left = scanner.nextDouble();
+
+        System.out.print("Enter right edge: ");
+        right = scanner.nextDouble();
+
+        if (left >= right) {
+            throw new IOException("Invalid range!");
+        }
+         if( function.fun(left) * function.fun(right) > 0) {
+             throw new RuntimeException("Same sign edges!");
+         }
+
+        System.out.println("\nselected range: <" + left + ", " + right + ">");
+        System.out.println();
+
+    }
+
+    private static void readEndingCondition () {
+        System.out.print("End by iterations(1) or epsilon(2)?: ");
+        int answer = scanner.nextInt();
+        endByApproximation = answer == 2;
+    }
+
+    private static void readEndingValue () {
+        if (endByApproximation) {
+            System.out.println("Enter epsilon: ");
+            epsilon = scanner.nextDouble();
+
+        } else {
+            System.out.println("Enter number of iterations: ");
+            iterations = scanner.nextInt();
+        }
+    }
+
+    public static void calculateSolutions () {
+        if (endByApproximation) {
+            solutionB = Bisection.approximity(function, left, right, epsilon);
+            solutionS = Secant.approximity(function, left, right, epsilon);
+
+        } else {
+            solutionB = Bisection.iterations(function, left, right, iterations);
+            solutionS = Secant.iterations(function, left, right, iterations);
+        }
+    }
+
+    public static void showResults() {
+        var arguments = function.calculateArgumentsIntoList(left, right);
+        var values = function.calculateValuesIntoList(left, right);
+
+        function.showGraph(" bisection", left, right, solutionB);
+        function.showGraph(" secant", left, right, solutionS);
     }
 
 
+    public static void setFunction (Function function) {
+        Controller.function = function;
+    }
+
+    public static void setRange(double left, double right) {
+        if( function.fun(left) * function.fun(right) > 0) {
+            throw new RuntimeException("Same sign edges!");
+        }
+        Controller.left = left;
+        Controller.right = right;
+    }
+
+    public static void setIterations (int iterations) {
+        Controller.endByApproximation = false;
+        Controller.iterations = iterations;
+    }
+
+    public static void setEpsilon (double epsilon) {
+        Controller.endByApproximation = true;
+        Controller.epsilon = epsilon;
+    }
+
+    public static double getSolutionS () {
+        return solutionS;
+    }
+
+    public static double getSolutionB () {
+        return solutionB;
+    }
 }
