@@ -14,15 +14,14 @@ public class Controller {
     private static boolean endByApproximation = false;
     private static int iterations = 10;
     private static double epsilon = 0.001;
-    private static double solutionS;
-    private static double solutionB;
+    private static double solutionS, solutionB;
 
     private static final Scanner scanner = new Scanner(System.in);
 
     public static void startApp() throws RuntimeException{
         chooseFunction();
 
-        function.showGraph("", function.getGraphLeft(), function.getGraphRight(), 0 );
+        function.showGraph("", function.getLeft(), function.getRight(), 0 );
 
         readEdges();
 
@@ -129,12 +128,12 @@ public class Controller {
 
     public static void calculateSolutions () {
         if (endByApproximation) {
-            solutionS = Bisection.Approximity(function, left, right, epsilon);
-            solutionB = Secant.Approximity(function, left, right, epsilon);
+            solutionB = Bisection.approximity(function, left, right, epsilon);
+            solutionS = Secant.approximity(function, left, right, epsilon);
 
         } else {
-            solutionS = Bisection.Iterations(function, left, right, iterations);
-            solutionB = Secant.Iterations(function, left, right, iterations);
+            solutionB = Bisection.iterations(function, left, right, iterations);
+            solutionS = Secant.iterations(function, left, right, iterations);
         }
     }
 

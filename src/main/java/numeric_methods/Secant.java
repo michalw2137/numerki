@@ -8,7 +8,7 @@ import static java.lang.Math.abs;
 
 public class Secant {
 
-    public static double Iterations(Function f, double left, double right, int iterations) {
+    public static double iterations (Function f, double left, double right, int iterations) {
         int i = 0;
         double x0 = 0;
         while ((i < iterations) && (left != right)) {
@@ -22,7 +22,7 @@ public class Secant {
         return right;
     }
 
-    public static double Approximity(Function f, double left, double right, double Epsilon) {
+    public static double approximity (Function f, double left, double right, double Epsilon) {
         ArrayList<Double> x = new ArrayList<>();
         x.add(1000.0);
         x.add(500.0);

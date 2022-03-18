@@ -1,9 +1,6 @@
 import application.Controller;
 import functions.*;
 import org.junit.Test;
-import  java.lang.StringBuilder;
-
-import static org.junit.Assert.assertEquals;
 
 public class efficiencyTest {
 
