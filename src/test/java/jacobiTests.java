@@ -3,8 +3,6 @@ import org.junit.Test;
 import structures.Matrix;
 import structures.Vector;
 
-import static org.junit.Assert.assertEquals;
-
 public class jacobiTests {
 
     @Test

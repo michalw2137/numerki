@@ -1,5 +1,7 @@
-TODO: read matrix/vectors from files
+TODO: read matrix/vectors from files. Make sure the lengths/dimensions are the same.
+    A.txt - matrix of coefficients
+    x.txt - assumption about x-es, starting with all 0es is recommended by google
+    b.txt - equations' results
+    expected.txt - results from wikamp that we anticipate to get, not required but are nice i think
 
-TODO: make a real interactive program
 
-TODO: implement 2 stop conditions

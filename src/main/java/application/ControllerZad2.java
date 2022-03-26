@@ -1,27 +1,32 @@
 package application;
 
-import functions.*;
-import numeric_methods.Bisection;
-import numeric_methods.Secant;
+import iterative_methods.Jacobi;
+import structures.Matrix;
+import structures.Vector;
 
-import java.io.IOException;
 import java.util.Scanner;
 
 public class ControllerZad2 {
 
-    private static double left, right;
-    private static Function function;
+    private static Matrix A;
+    private static Vector b;
+    private static Vector x;
+    private static Vector solution;
+    private static Vector expected;
+
     private static boolean endByApproximation = false;
     private static int iterations = 10;
     private static double epsilon = 0.001;
-    private static double solutionS, solutionB;
 
     private static final Scanner scanner = new Scanner(System.in);
 
     public static void startApp() throws RuntimeException{
-//        readAfromFile();
-//        readXfromFile();
-//        readBfromFile();
+        readAfromFile();
+        readXfromFile();
+        readBfromFile();
+        readExpectedFromFile();
+
+        printInfo();
 
         readEndingCondition();
 
@@ -33,7 +38,48 @@ public class ControllerZad2 {
 
         System.out.println();
     }
-    
+
+    private static void readBfromFile () {  // TODO: implement reading from file
+        double[][] j = {{1, 0.2, 0.3},
+                        {0.1, 1, -0.3},
+                        {-0.1, -0.2, 1}};
+        double[][] d = {{0.5,       -0.0625,    0.1875, 0.0625},
+                        {-0.0625,   0.5,        0,      0},
+                        {0.1875,    0 ,         0.375,  0.125},
+                        {0.0625,    0,          0.125,  0.25}};
+        A = new Matrix(d);
+    }
+
+    private static void readXfromFile () {  // TODO: implement reading from file
+        double[] j = {0, 0, 0};
+        double[] d = {0, 0, 0, 0};
+
+        x = new Vector(d);
+    }
+
+    private static void readAfromFile () {  // TODO: implement reading from file
+        double[] j = {1.5, 0.8, 0.7};
+        double[] d = {1.5, -1.625, 1, 0.4375};
+        b = new Vector(d);
+    }
+
+    private static void readExpectedFromFile () {  // TODO: implement reading from file
+        double[] j = {1, 1, 1};
+        double[] d = {2, -3, 1.5, 0.5};
+        expected = new Vector(d);
+    }
+
+    private static void printInfo() {
+        System.out.println("Matrix A:");
+        A.print();
+        System.out.println("Vector x:");
+        x.print();
+        System.out.println();
+        System.out.println("Vector b:");
+        b.print();
+        System.out.println();
+    }
+
     private static void readEndingCondition () {
         System.out.print("End by iterations(1) or epsilon(2)?: ");
         int answer = scanner.nextInt();
@@ -53,34 +99,25 @@ public class ControllerZad2 {
 
     public static void calculateSolutions () {
         if (endByApproximation) {
-            solutionB = Bisection.approximity(function, left, right, epsilon);
-            solutionS = Secant.approximity(function, left, right, epsilon);
+            solution = Jacobi.approximity(A, x, b, epsilon);
 
         } else {
-            solutionB = Bisection.iterations(function, left, right, iterations);
-            solutionS = Secant.iterations(function, left, right, iterations);
+            solution = Jacobi.iterations(A, x, b, iterations);
         }
     }
 
     public static void showResults() {
-        var arguments = function.calculateArgumentsIntoList(left, right);
-        var values = function.calculateValuesIntoList(left, right);
-
-        function.showGraph(" bisection", left, right, solutionB);
-        function.showGraph(" secant", left, right, solutionS);
-    }
-
-
-    public static void setFunction (Function function) {
-        ControllerZad2.function = function;
-    }
-
-    public static void setRange(double left, double right) {
-        if( function.fun(left) * function.fun(right) > 0) {
-            throw new RuntimeException("Same sign edges!");
+        System.out.println();
+        System.out.println("CALCULATED RESULT:");
+        solution.print();
+        try {
+            System.out.println("\nEXPECTED RESULT:");
+            expected.print();
+        } catch (NullPointerException ignored){
+            System.out.println("expected result not specified");
         }
-        ControllerZad2.left = left;
-        ControllerZad2.right = right;
+
+        System.out.println("\n========================================\n");
     }
 
     public static void setIterations (int iterations) {
@@ -93,11 +130,8 @@ public class ControllerZad2 {
         ControllerZad2.epsilon = epsilon;
     }
 
-    public static double getSolutionS () {
-        return solutionS;
+    public static Vector getSolution () {
+        return solution;
     }
 
-    public static double getSolutionB () {
-        return solutionB;
-    }
 }

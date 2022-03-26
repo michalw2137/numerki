@@ -24,7 +24,7 @@ public class Matrix {
     public void print() {
         for (double[] row : fields) {
             for (double value : row) {
-                System.out.print(value + "\t\t");
+                System.out.printf("%10.8s", value);
             }
             System.out.println();
         }
