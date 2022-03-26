@@ -7,7 +7,7 @@ import numeric_methods.Secant;
 import java.io.IOException;
 import java.util.Scanner;
 
-public class Controller {
+public class ControllerZad1 {
 
     private static double left, right;
     private static Function function;
@@ -147,25 +147,25 @@ public class Controller {
 
 
     public static void setFunction (Function function) {
-        Controller.function = function;
+        ControllerZad1.function = function;
     }
 
     public static void setRange(double left, double right) {
         if( function.fun(left) * function.fun(right) > 0) {
             throw new RuntimeException("Same sign edges!");
         }
-        Controller.left = left;
-        Controller.right = right;
+        ControllerZad1.left = left;
+        ControllerZad1.right = right;
     }
 
     public static void setIterations (int iterations) {
-        Controller.endByApproximation = false;
-        Controller.iterations = iterations;
+        ControllerZad1.endByApproximation = false;
+        ControllerZad1.iterations = iterations;
     }
 
     public static void setEpsilon (double epsilon) {
-        Controller.endByApproximation = true;
-        Controller.epsilon = epsilon;
+        ControllerZad1.endByApproximation = true;
+        ControllerZad1.epsilon = epsilon;
     }
 
     public static double getSolutionS () {

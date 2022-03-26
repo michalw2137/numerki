@@ -1,4 +1,4 @@
-import application.Controller;
+import application.ControllerZad1;
 import functions.*;
 import org.junit.Test;
 
@@ -10,11 +10,11 @@ public class efficiencyTest {
 
         function.showGraph();
 
-        Controller.setFunction(function);
+        ControllerZad1.setFunction(function);
 
-        Controller.setRange(left, right);
-        Controller.setEpsilon(epsilon);
-        Controller.calculateSolutions();
+        ControllerZad1.setRange(left, right);
+        ControllerZad1.setEpsilon(epsilon);
+        ControllerZad1.calculateSolutions();
     }
 
     public void calculateIterations(Function function, double left, double right, int iterations) {
@@ -23,11 +23,11 @@ public class efficiencyTest {
 
         function.showGraph();
 
-        Controller.setFunction(function);
+        ControllerZad1.setFunction(function);
 
-        Controller.setRange(left, right);
-        Controller.setIterations(iterations);
-        Controller.calculateSolutions();
+        ControllerZad1.setRange(left, right);
+        ControllerZad1.setIterations(iterations);
+        ControllerZad1.calculateSolutions();
     }
 
     @Test

@@ -1,9 +1,4 @@
-import application.Controller;
-import functions.*;
-import view.XYSeriesDemo;
-
-import java.io.IOException;
-import java.util.Scanner;
+import application.ControllerZad1;
 
 public class Main {
 
@@ -11,7 +6,7 @@ public class Main {
          while (true) {
             try
             {
-                Controller.startApp();
+                ControllerZad1.startApp();
             }
             catch (RuntimeException e)
             {
