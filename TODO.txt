@@ -1,0 +1,5 @@
+TODO: read matrix/vectors from files
+
+TODO: make a real interactive program
+
+TODO: implement 2 stop conditions
