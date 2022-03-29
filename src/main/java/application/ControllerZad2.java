@@ -1,9 +1,11 @@
 package application;
 
+import files.Reader;
 import iterative_methods.Jacobi;
 import structures.Matrix;
 import structures.Vector;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class ControllerZad2 {
@@ -20,7 +22,7 @@ public class ControllerZad2 {
 
     private static final Scanner scanner = new Scanner(System.in);
 
-    public static void startApp() throws RuntimeException{
+    public static void startApp() throws RuntimeException, IOException {
         readAfromFile();
         readXfromFile();
         readBfromFile();
@@ -39,34 +41,24 @@ public class ControllerZad2 {
         System.out.println();
     }
 
-    private static void readBfromFile () {  // TODO: implement reading from file
-        double[][] j = {{1, 0.2, 0.3},
-                        {0.1, 1, -0.3},
-                        {-0.1, -0.2, 1}};
-        double[][] d = {{0.5,       -0.0625,    0.1875, 0.0625},
-                        {-0.0625,   0.5,        0,      0},
-                        {0.1875,    0 ,         0.375,  0.125},
-                        {0.0625,    0,          0.125,  0.25}};
-        A = new Matrix(d);
+    private static void readBfromFile () throws IOException {
+        Reader read = new Reader();
+        A = new Matrix(read.readMatrix("src/main/java/files/A.txt"));
     }
 
-    private static void readXfromFile () {  // TODO: implement reading from file
-        double[] j = {0, 0, 0};
-        double[] d = {0, 0, 0, 0};
-
-        x = new Vector(d);
+    private static void readXfromFile () throws IOException {  
+        Reader read = new Reader();
+        x = new Vector(read.readVector("src/main/java/files/x.txt"));
     }
 
-    private static void readAfromFile () {  // TODO: implement reading from file
-        double[] j = {1.5, 0.8, 0.7};
-        double[] d = {1.5, -1.625, 1, 0.4375};
-        b = new Vector(d);
+    private static void readAfromFile () throws IOException {
+        Reader read = new Reader();
+        b = new Vector(read.readVector("src/main/java/files/b.txt"));
     }
 
-    private static void readExpectedFromFile () {  // TODO: implement reading from file
-        double[] j = {1, 1, 1};
-        double[] d = {2, -3, 1.5, 0.5};
-        expected = new Vector(d);
+    private static void readExpectedFromFile () throws IOException {
+        Reader read = new Reader();
+        expected = new Vector(read.readVector("src/main/java/files/expected.txt"));
     }
 
     private static void printInfo() {

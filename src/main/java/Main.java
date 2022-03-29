@@ -1,6 +1,8 @@
 import application.ControllerZad1;
 import application.ControllerZad2;
 
+import java.io.IOException;
+
 public class Main {
 
     public static void main(String[] args) {    // działa jeden na raz, odkomentowuj pojedynczo
@@ -19,7 +21,7 @@ public class Main {
         while (true) {
             try {
                 ControllerZad2.startApp();
-            } catch (RuntimeException e) {
+            } catch (RuntimeException | IOException e) {
                 return;
             }
         }
