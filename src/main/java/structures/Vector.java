@@ -15,7 +15,7 @@ public class Vector {
 
     public void print() {
         for (double value : fields) {
-            System.out.printf("   %-15.13s", value);
+            System.out.printf("       %-15.13s", value);
             System.out.println();
         }
     }

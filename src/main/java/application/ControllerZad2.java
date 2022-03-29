@@ -5,7 +5,6 @@ import iterative_methods.Jacobi;
 import structures.Matrix;
 import structures.Vector;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Objects;
 import java.util.Scanner;
