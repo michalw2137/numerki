@@ -5,7 +5,9 @@ import iterative_methods.Jacobi;
 import structures.Matrix;
 import structures.Vector;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class ControllerZad2 {
@@ -16,14 +18,28 @@ public class ControllerZad2 {
     private static Vector solution;
     private static Vector expected;
 
+    private static String expectedInfo;
+    private static String directory;
+
     private static boolean endByApproximation = false;
     private static int iterations = 10;
     private static double epsilon = 0.001;
 
     private static final Scanner scanner = new Scanner(System.in);
+    private static final Reader read = new Reader();
 
-    public static void startApp() throws RuntimeException, IOException {
+
+    public static void startApp() throws RuntimeException, IOException, IllegalAccessException {
+        readDirectory();
+
         readAfromFile();
+
+        if (!Jacobi.isCorrect(A)) {
+            System.out.println("matrix A:");
+            A.print();
+            throw new RuntimeException("Matrix isnt diagonally dominant");
+        }
+
         readXfromFile();
         readBfromFile();
         readExpectedFromFile();
@@ -41,24 +57,45 @@ public class ControllerZad2 {
         System.out.println();
     }
 
-    private static void readBfromFile () throws IOException {
-        Reader read = new Reader();
-        A = new Matrix(read.readMatrix("src/main/java/files/A.txt"));
-    }
-
-    private static void readXfromFile () throws IOException {  
-        Reader read = new Reader();
-        x = new Vector(read.readVector("src/main/java/files/x.txt"));
+    private static void readDirectory () throws IllegalAccessException {
+        System.out.println("Choose matrix:");
+        System.out.println("a/b/c/d/e/f/g/h/i/j/custom");
+        do {
+            directory = scanner.nextLine();
+            if (Objects.equals(directory, "q")) {
+                throw new IllegalAccessException("User ended program");
+            }
+        } while (!Objects.equals(directory, "a")
+                && !Objects.equals(directory, "b")
+                && !Objects.equals(directory, "c")
+                && !Objects.equals(directory, "d")
+                && !Objects.equals(directory, "e")
+                && !Objects.equals(directory, "f")
+                && !Objects.equals(directory, "g")
+                && !Objects.equals(directory, "h")
+                && !Objects.equals(directory, "i")
+                && !Objects.equals(directory, "j")
+                && !Objects.equals(directory, "custom"));
     }
 
     private static void readAfromFile () throws IOException {
-        Reader read = new Reader();
-        b = new Vector(read.readVector("src/main/java/files/b.txt"));
+        A = new Matrix(read.readMatrix("src/examples/" + directory + "/A.txt"));
+    }
+
+    private static void readXfromFile () throws IOException {  
+        x = new Vector(read.readVector("src/examples/" + directory + "/x.txt"));
+    }
+
+    private static void readBfromFile () throws IOException {
+        b = new Vector(read.readVector("src/examples/" + directory + "/b.txt"));
     }
 
     private static void readExpectedFromFile () throws IOException {
-        Reader read = new Reader();
-        expected = new Vector(read.readVector("src/main/java/files/expected.txt"));
+        try {
+            expected = new Vector(read.readVector("src/examples/" + directory + "/expected.txt"));
+        } catch (NumberFormatException | IOException e) {
+            expectedInfo = read.readString("src/examples/" + directory + "/expected.txt");
+        }
     }
 
     private static void printInfo() {
@@ -106,10 +143,10 @@ public class ControllerZad2 {
             System.out.println("\nEXPECTED RESULT:");
             expected.print();
         } catch (NullPointerException ignored){
-            System.out.println("expected result not specified");
+            System.out.println(expectedInfo);
         }
 
-        System.out.println("\n========================================\n");
+        System.out.println("========================================================================================================================");
     }
 
     public static void setIterations (int iterations) {

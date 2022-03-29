@@ -22,6 +22,11 @@ public class Main {
             try {
                 ControllerZad2.startApp();
             } catch (RuntimeException | IOException e) {
+                System.out.println(e.getMessage());
+//                e.printStackTrace();
+                System.out.println();
+            } catch (IllegalAccessException e) {
+                System.out.println(e.getMessage());
                 return;
             }
         }

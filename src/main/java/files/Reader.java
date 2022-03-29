@@ -27,6 +27,12 @@ public class Reader {
         return tab;
     }
 
+    public String readString(String fileName) throws IOException {
+        File file = new File(fileName);
+        Scanner sc = new Scanner(file);
+        return sc.nextLine();
+    }
+
     public double[][] readMatrix(String fileName) throws IOException {
         File file = new File(fileName);
         Scanner sc = new Scanner(file);
@@ -44,8 +50,6 @@ public class Reader {
                 else break;
             }
         }
-
-
 
         return tab;
     }
