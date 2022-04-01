@@ -9,7 +9,7 @@ public class interpolationTests {
     @Test
     public void testNodes() {
         for(int i=1; i<20; i++){
-            var nodes = LaGrange.getNChebyshevNodes(i);
+            var nodes = LaGrange.getNChebyshevNodes(i, 0, 2);
             System.out.printf("n = " + i + ": ");
             for(Double node: nodes) {
                 System.out.format("%.5f, ", node);
