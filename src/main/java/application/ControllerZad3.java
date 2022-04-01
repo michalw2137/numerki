@@ -1,10 +1,9 @@
 package application;
 
 import functions.*;
-import numeric_methods.Bisection;
-import numeric_methods.Secant;
 
 import java.io.IOException;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class ControllerZad3 {
@@ -24,14 +23,6 @@ public class ControllerZad3 {
 
         
 
-        System.out.println();
-    }
-
-    private static void readNodesNumber() {
-        System.out.print("Enter nodes number: ");
-        nodesNumber = scanner.nextInt();
-        
-        System.out.println("\nNodes number: " + nodesNumber );
         System.out.println();
     }
 
@@ -99,16 +90,28 @@ public class ControllerZad3 {
         if (left >= right) {
             throw new IOException("Invalid range!");
         }
-        if( function.fun(left) * function.fun(right) > 0) {
-            throw new RuntimeException("Same sign edges!");
-        }
 
         System.out.println("\nselected range: <" + left + ", " + right + ">");
         System.out.println();
 
     }
 
-   
+    private static void readNodesNumber() {
+        while (true) {
+            try {
+                tryToReadNodesNumber();
+                return;
+            } catch (InputMismatchException e) {
+                System.out.println("invalid input");
+                scanner.next();
+            }
+        }
+    }
+
+    private static void tryToReadNodesNumber() throws InputMismatchException {
+        System.out.print("Enter nodes number: ");
+        nodesNumber = scanner.nextInt();
+    }
 
     public static void setFunction (Function function) {
         ControllerZad3.function = function;
