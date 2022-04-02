@@ -49,15 +49,20 @@ public class ControllerZad3 {
         var tangent = new FunctionTangent();
         var linear = new FunctionLinear();
         var modulo = new FunctionModulo();
+        var quadratic = new FunctionQuadratic();
 
         System.out.println("CHOOSE FUNCTION:");
-        System.out.println( "1) " + polynomial.getFormula() + "\n" +
-                "2) " + exponential.getFormula() + "\n" +
-                "3) " + sine.getFormula() + "\n" +
-                "4) " + cosine.getFormula() + "\n" +
-                "5) " + tangent.getFormula()  + "\n" +
-                "6) " + linear.getFormula()  + "\n" +
-                "7) " + modulo.getFormula()  + "\n" +
+        System.out.println(
+                "1) " + modulo.getFormula()  + "\n" +
+                "2) " + linear.getFormula()  + "\n" +
+                "3) " + quadratic.getFormula()  + "\n" +
+                "4) " + polynomial.getFormula() + "\n" +
+
+                "5) " + sine.getFormula() + "\n" +
+                "6) " + cosine.getFormula() + "\n" +
+                "7) " + tangent.getFormula()  + "\n" +
+
+                "8) " + exponential.getFormula() + "\n" +
 
                 "9) exit \n\n" +
                 "Your choice (1-5): ");
@@ -65,31 +70,35 @@ public class ControllerZad3 {
             int choice = scanner.nextInt();
             switch (choice) {
                 case 1 -> {
-                    function = polynomial;
+                    function = modulo;
                     return;
                 }
                 case 2 -> {
-                    function = exponential;
-                    return;
-                }
-                case 3 -> {
-                    function = sine;
-                    return;
-                }
-                case 4 -> {
-                    function = cosine;
-                    return;
-                }
-                case 5 -> {
-                    function = tangent;
-                    return;
-                }
-                case 6 -> {
                     function = linear;
                     return;
                 }
+                case 3 -> {
+                    function = quadratic;
+                    return;
+                }
+                case 4 -> {
+                    function = polynomial;
+                    return;
+                }
+                case 5 -> {
+                    function = sine;
+                    return;
+                }
+                case 6 -> {
+                    function = cosine;
+                    return;
+                }
                 case 7 -> {
-                    function = modulo;
+                    function = tangent;
+                    return;
+                }
+                case 8 -> {
+                    function = exponential;
                     return;
                 }
                 case 9 -> {

@@ -1,20 +1,18 @@
-T0 										= 1
-T1 										= x
-T2 = 2x * x - 1 						= 2x^2 - 1
-T3 = 2x * (2x^2 - 1) - x 				= 4x^3 - 3x
-T4 = 2x * (4x^3 - 3x) - (2x^2 - 1) 		= 8x^4 - 8x^2 + 1
+Obserwacje:
+- aby odwzorować wielomian N stopnia potrzeba N+1 węzłów
+- im więcej węzłów tym lepsze odwzorowanie
+- interpolacja nie lubi ostrych czubków, szczególnie w centrum, gdzie węzły są rzadziej
 
-wielomian k-tego stopnia ma k m0
 
-na brzegach rób częściej
+- czemu zagęszczamy na brzegach??
 
-liczba węzłów - stopień wielomianu k = ilość m0
-
-2x(2x(2x(2x(x) - 1) - x) - 2x(x) - 1) - 2x(2x(x) - 1) - x)
 
 https://pl.wikipedia.org/wiki/Wielomiany_Czebyszewa
+
 https://pl.wikipedia.org/wiki/Interpolacja_wielomianowa
+
 https://pl.wikipedia.org/wiki/Węzły_Czebyszewa
+
 http://www.geol.agh.edu.pl/~mpapiez/MN/zajecia5.html
 
 Wariant 3: Lagrange'a na węzłach Czebyszewa
@@ -23,21 +21,22 @@ Program ma umożliwiać wczytanie stablicowanych wartości funkcji oraz umożliw
 
 W sprawozdaniu należy zamieścić przykładowe wykresy. Zbadać w jaki sposób zmiana liczby węzłów wpływa na dokładność interpolacji. Ile węzłów potrzeba do interpolacji wielomianu N-tego stopnia?
 
-- [x] wczytanie stablicowanych wartości funkcji
-- [ ] wybór funkcji
-  - [ ] liniowa
-  - [ ] moduł
+- [x] wczytanie stablicowanych wartości funkcji 
+- [x] wybór funkcji
+  - [x] liniowa
+  - [x] moduł
   - [x] wielomian
   - [x] trygonometryczna
-  - [ ] złożenia ?
+  - [x] złożenia ?
 - [x] wybór przedziału interpolacji
 - [x] położenie węzłów wyliczane z wzoru Czebyszewa
 - [x] wartości w węzłach wyliczane wybraną funkcją
-- [ ] rysowanie oryginalnego wykresu
-- [ ] rysowanie wielomianu interpolującego
-  - [ ] zaznaczyć węzły interpolacji
-  - [ ] wartości w węzłach pokrywają się z wykresem
+- [x] rysowanie oryginalnego wykresu
+- [x] rysowanie wielomianu interpolującego
+  - [x] zaznaczyć węzły interpolacji
+  - [x] wartości w węzłach pokrywają się z wykresem
   
 
-- [ ] wartości wielomianów interpolowanych obliczane Hornerem
-- [ ] wartości wielomianów interpolacyjnych obliczane bezpośrednio
+- [x] wartości wielomianów interpolowanych obliczane Hornerem
+- [x] wartości wielomianów interpolacyjnych obliczane bezpośrednio
+

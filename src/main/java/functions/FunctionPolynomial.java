@@ -11,6 +11,6 @@ public class FunctionPolynomial extends Function {
     public double fun(double x) {
         int[] tab = {1,-1,-2,1};
 //        return x*x*x - x*x - 2*x + 1;
-        return horner(tab, tab.length, x);
+        return horner(tab, x);
     }
 }

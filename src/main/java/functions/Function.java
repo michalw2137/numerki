@@ -92,10 +92,10 @@ public abstract class Function {
         view.setVisible(true);
     }
 
-    static double horner(int[] poly, int n, double x) {
+    static double horner(int[] poly, double x) {
         double result = poly[0];
 
-        for (int i = 1; i < n; i++)
+        for (int i = 1; i < poly.length; i++)
             result = result * x + poly[i];
 
         return result;
