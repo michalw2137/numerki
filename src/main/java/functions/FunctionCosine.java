@@ -10,7 +10,6 @@ public class FunctionCosine extends Function {
 
     @Override
     public double fun(double x) {
-        return 2 * cos(2*x);    // ta funkcja jest trochę sus bo nie ma miejsc zerowych xd
-                                // moze zle przepisalem, zweryfikowac z innymi
+        return 2 * cos(2*x);
     }
 }

@@ -9,6 +9,8 @@ import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
 import org.jfree.chart.ui.ApplicationFrame;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
+
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -71,5 +73,67 @@ public class XYSeriesDemo extends ApplicationFrame {
         final ChartPanel chartPanel = new ChartPanel(chart);
         chartPanel.setPreferredSize(new java.awt.Dimension(1000, 540));
         setContentPane(chartPanel);
+    }
 
-    }}
+    public XYSeriesDemo(ArrayList<Double> originX, ArrayList<Double> originY,
+                        ArrayList<Double> interpolatedXFunction, ArrayList<Double> interpolatedYFunction
+                        ,ArrayList<Double> nodesX, ArrayList<Double> nodesY) {
+        super("Ilość węzłów: "+ nodesX.size());
+
+        int number = nodesX.size();
+
+        final XYSeries originSeries = new XYSeries("f(x)");
+
+        for(int i=0; i<originX.size(); i++) {
+            originSeries.add(originX.get(i),originY.get(i));
+        }
+
+        final XYSeries interpolatedSeries = new XYSeries("f'(x)");
+
+        final XYSeries point = new XYSeries("nodes");
+
+        for (int i = 0; i < nodesX.size(); i++) {
+            point.add(nodesX.get(i), nodesY.get(i));
+        }
+
+        for (int i = 0; i < interpolatedXFunction.size(); i++) {
+            interpolatedSeries.add(interpolatedXFunction.get(i),interpolatedYFunction.get(i));
+        }
+
+
+        final XYSeriesCollection data = new XYSeriesCollection(originSeries);
+        data.addSeries(interpolatedSeries);
+        data.addSeries(point);
+
+
+        final JFreeChart chart = ChartFactory.createXYLineChart(
+                "Ilość węzłów: "+ number,
+                "oś X",
+                "oś Y",
+                data,
+                PlotOrientation.VERTICAL,
+                true,
+                true,
+                false
+        );
+
+        XYPlot plot = (XYPlot) chart.getPlot();
+        XYLineAndShapeRenderer renderer = new XYLineAndShapeRenderer();
+        renderer.setSeriesLinesVisible(0, true);
+        renderer.setSeriesShapesVisible(0, false);
+        renderer.setSeriesLinesVisible(1, true);
+        renderer.setSeriesShapesVisible(1, false);
+
+        renderer.setSeriesShape(2,new Rectangle(-2,-2,4,4));
+        renderer.setSeriesShapesVisible(2,true);
+        renderer.setSeriesLinesVisible(2, false);
+        renderer.setSeriesShapesFilled(2,true);
+        plot.setRenderer(renderer);
+
+        final ChartPanel chartPanel = new ChartPanel(chart);
+        chartPanel.setPreferredSize(new java.awt.Dimension(1000, 540));
+        setContentPane(chartPanel);
+
+    }
+
+}

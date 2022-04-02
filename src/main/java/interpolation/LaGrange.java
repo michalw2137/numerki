@@ -7,10 +7,24 @@ import java.util.ArrayList;
 import static java.lang.Math.PI;
 import static java.lang.Math.cos;
 
-public class LaGrange {
+public class LaGrange extends Function{
 
-    private static ArrayList<Double> args;
-    private static ArrayList<Double> vals;
+    private ArrayList<Double> args;
+    private ArrayList<Double> vals;
+
+    public LaGrange(ArrayList<Double> args, ArrayList<Double> vals) {
+        super("interpolating polynomial", -5, 5);
+        this.args = args;
+        this.vals = vals;
+    }
+
+    public void setArgs(ArrayList<Double> args) {
+        this.args = args;
+    }
+
+    public void setVals(ArrayList<Double> vals) {
+        this.vals = vals;
+    }
 
     public static ArrayList<Double> getNChebyshevNodes(int n, double a, double b) {
         ArrayList<Double> nodes = new ArrayList<>();
@@ -23,7 +37,8 @@ public class LaGrange {
         return nodes;
     }
 
-    public static ArrayList<Double> calculateValuesInNodes(ArrayList<Double> nodes, Function function) {
+    public static ArrayList<Double> calculateValuesInNodes(int n, double a, double b, Function function) {
+        var nodes = getNChebyshevNodes(n, a, b);
         ArrayList<Double> values = new ArrayList<>();
         for (double node: nodes) {
             values.add(function.fun(node));
@@ -31,10 +46,7 @@ public class LaGrange {
         return values;
     }
 
-    public static Double interpolation(double x, ArrayList<Double> args, ArrayList<Double> vals) {
-        LaGrange.args = args;
-        LaGrange.vals = vals;
-
+    public Double interpolation(double x) {
         double solution = 0;
         for (int i=0; i< args.size(); i++) {
             solution += vals.get(i) * multiply(x, i) / multiply(args.get(i), i);
@@ -42,7 +54,7 @@ public class LaGrange {
         return solution;
     }
 
-    private static Double multiply(double xToSubstractFrom, int indexToSkip) {
+    private Double multiply(double xToSubstractFrom, int indexToSkip) {
         double solution = 1;
         for (int i=0; i< args.size(); i++) {
             if (i != indexToSkip) {
@@ -50,5 +62,10 @@ public class LaGrange {
             }
         }
         return solution;
+    }
+
+    @Override
+    public double fun(double x) {
+        return interpolation(x);
     }
 }

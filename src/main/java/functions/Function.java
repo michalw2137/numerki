@@ -17,6 +17,7 @@ public abstract class Function {
         this.right = right;
     }
 
+
     public String getFormula() {
         return formula;
     }
@@ -43,6 +44,16 @@ public abstract class Function {
         return values;
     }
 
+    public ArrayList<Double> calculateValuesIntoList() {
+        ArrayList<Double> values = new ArrayList<>();
+        double x = left;
+        while (x < right) {
+            values.add(fun(x));
+            x += increment;
+        }
+        return values;
+    }
+
     public ArrayList<Double> calculateArgumentsIntoList(double left, double right) {
         ArrayList<Double> arguments = new ArrayList<>();
         double x = left;
@@ -53,9 +64,19 @@ public abstract class Function {
         return arguments;
     }
 
+    public ArrayList<Double> calculateArgumentsIntoList() {
+        ArrayList<Double> arguments = new ArrayList<>();
+        double x = left;
+        while (x < right) {
+            arguments.add(x);
+            x += increment;
+        }
+        return arguments;
+    }
+
     public void showGraph() {
-        var arguments = calculateArgumentsIntoList(getLeft(), getRight());
-        var values = calculateValuesIntoList(getLeft(), getRight());
+        var arguments = calculateArgumentsIntoList();
+        var values = calculateValuesIntoList();
 
         XYSeriesDemo view = new XYSeriesDemo(getFormula(), arguments, values, 0);
         view.pack();
