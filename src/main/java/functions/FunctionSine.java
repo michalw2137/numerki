@@ -4,7 +4,7 @@ import static java.lang.Math.*;
 
 public class FunctionSine extends Function {
     public FunctionSine() {
-        super("3x + sin(x) - e^x = 0", -2, 3);
+        super("3x + sin(x) - e^x = 0", 0, 10);
     }
 
     @Override

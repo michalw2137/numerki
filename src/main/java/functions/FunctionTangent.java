@@ -4,7 +4,7 @@ import static java.lang.Math.tan;
 
 public class FunctionTangent extends Function {
     public FunctionTangent() {
-        super("tg(x) - 1 = 0", -1.5, 1.5);
+        super("tg(x) - 1 = 0", -5, 5);
         super.setIncrement(0.02);
     }
 

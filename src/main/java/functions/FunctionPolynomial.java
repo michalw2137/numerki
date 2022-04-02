@@ -4,7 +4,7 @@ public class FunctionPolynomial extends Function {
 
 
     public FunctionPolynomial() {
-        super("x^3 - x^2 -2x + 1 = 0", -3, 3);
+        super("x^3 - x^2 -2x + 1 = 0", -20, 20);
     }
 
     @Override

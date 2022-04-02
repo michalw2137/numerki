@@ -1,15 +1,11 @@
 import functions.*;
 import interpolation.LaGrange;
-import iterative_methods.Jacobi;
 import org.junit.Test;
-import structures.Matrix;
-import structures.Vector;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
 import static java.lang.Double.valueOf;
-import static java.util.Optional.ofNullable;
 import static org.junit.Assert.assertEquals;
 
 public class interpolationTests {
@@ -56,10 +52,6 @@ public class interpolationTests {
         assertEquals(f2, valueOf(1));
         assertEquals(f3, valueOf(4));
         assertEquals(f4, valueOf(9));
-
-
     }
-
-
 
 }

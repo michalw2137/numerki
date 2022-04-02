@@ -1,8 +1,7 @@
 import application.ControllerZad1;
 import application.ControllerZad2;
 import application.ControllerZad3;
-import functions.Function;
-import functions.FunctionSine;
+import functions.*;
 import interpolation.LaGrange;
 import view.XYSeriesDemo;
 
@@ -12,36 +11,41 @@ import java.util.Arrays;
 
 public class Main {
 
-    public static void main(String[] args) {    // działa jeden na raz, odkomentowuj pojedynczo
-        int n = 6;
-        int a = -5;
-        int b = 5;
-        Function sin = new FunctionSine();
+    private static void test(Function function, double a, double b, int n) {
+        ControllerZad3.setFunction(new FunctionSine());
+        ControllerZad3.setRange(a, b);
+        ControllerZad3.setNodesNumber(n);
+        ControllerZad3.doCalculations();
+        ControllerZad3.showResults();
+    }
 
-        var nodesX = LaGrange.getNChebyshevNodes(n, a, b);
-        var nodesY = LaGrange.calculateValuesInNodes(n, a, b, sin);
+    public static void main(String[] args) {
 
-        LaGrange laGrange = new LaGrange(nodesX, nodesY);
+//        for (int i = 2; i <= 5; i+=2) {   // TODO: zrobić sprawko, plz użyj tego zamiast ręcznego odpalania programu
+//            test(new FunctionSine(), -10, 10, i);
+//        }
+//        test(new FunctionExponential(), -10, 10, 100);
 
-//        lg.showGraph();
+        while (true) {
+            try {
+                ControllerZad3.startApp();
+            }
+        catch (RuntimeException e) {
+                System.out.println("Program ended by user");
+                return;
+            }
+        }
 
-
-        XYSeriesDemo view = new XYSeriesDemo(sin.calculateArgumentsIntoList(a, b), sin.calculateValuesIntoList(a, b),
-                                            laGrange.calculateArgumentsIntoList(a, b), laGrange.calculateValuesIntoList(a, b),
-                                            nodesX, nodesY);
-        view.pack();
-        view.setVisible(true);
-//         while (true) {
-//            try
-//            {
-//                ControllerZad3.startApp();
+//        while (true) {
+//            try {
+//                ControllerZad1.startApp();
 //            }
-//            catch (RuntimeException e)
-//            {
+//            catch (RuntimeException e) {
 //                System.out.println("Program ended by user");
 //                return;
 //            }
 //        }
+
 //        System.out.println("Type 'q' to exit \n");
 //        while (true) {
 //            try {
