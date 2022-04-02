@@ -1,6 +1,7 @@
 package files;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Reader {
@@ -53,4 +54,33 @@ public class Reader {
 
         return tab;
     }
+
+    public static ArrayList<Double> readArguments(String fileName) throws FileNotFoundException {
+        Scanner sc = new Scanner(new File(fileName));
+        ArrayList<Double> arguments = new ArrayList<>();
+        int i = 0;
+        while(sc.hasNext()) {
+            String value = sc.next();
+            if (i % 2 == 0) {
+                arguments.add(Double.valueOf(value));
+            }
+            i++;
+        }
+        return arguments;
+    }
+
+    public static ArrayList<Double> readValues(String fileName) throws FileNotFoundException {
+        Scanner sc = new Scanner(new File(fileName));
+        ArrayList<Double> values = new ArrayList<>();
+        int i = 0;
+        while(sc.hasNext()) {
+            String value = sc.next();
+            if (i % 2 == 1) {
+                values.add(Double.valueOf(value));
+            }
+            i++;
+        }
+        return values;
+    }
+
 }

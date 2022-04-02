@@ -6,8 +6,12 @@ import org.junit.Test;
 import structures.Matrix;
 import structures.Vector;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
+
+import static org.junit.Assert.assertEquals;
 
 public class readTest {
     @Test
@@ -22,7 +26,15 @@ public class readTest {
         Reader read = new Reader();
         //read.read("src/main/java/files/b.txt");
         //read.readVector("src/main/java/files/b.txt");
-        double [][] test = read.readMatrix("src/main/java/files/A.txt");
-        System.out.println(Arrays.deepToString(test));
+//        double [][] test = read.readMatrix("src/main/java/files/A.txt");
+//        System.out.println(Arrays.deepToString(test));
+    }
+
+    @Test
+    public void testReadArguments() throws FileNotFoundException {
+        assertEquals(new ArrayList<Double>(Arrays.asList(1., 2., 3., 4., 5.)),
+                Reader.readArguments("src/files_interpolation/test.txt"));
+        assertEquals(new ArrayList<Double>(Arrays.asList(10., -11., 12., -13., 14.)),
+                Reader.readValues("src/files_interpolation/test.txt"));
     }
 }

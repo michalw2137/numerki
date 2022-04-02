@@ -78,22 +78,22 @@ public class ControllerZad2 {
     }
 
     private static void readAfromFile () throws IOException {
-        A = new Matrix(read.readMatrix("src/examples/" + directory + "/A.txt"));
+        A = new Matrix(read.readMatrix("src/files_matricies/" + directory + "/A.txt"));
     }
 
     private static void readXfromFile () throws IOException {  
-        x = new Vector(read.readVector("src/examples/" + directory + "/x.txt"));
+        x = new Vector(read.readVector("src/files_matricies/" + directory + "/x.txt"));
     }
 
     private static void readBfromFile () throws IOException {
-        b = new Vector(read.readVector("src/examples/" + directory + "/b.txt"));
+        b = new Vector(read.readVector("src/files_matricies/" + directory + "/b.txt"));
     }
 
     private static void readExpectedFromFile () throws IOException {
         try {
-            expected = new Vector(read.readVector("src/examples/" + directory + "/expected.txt"));
+            expected = new Vector(read.readVector("src/files_matricies/" + directory + "/expected.txt"));
         } catch (NumberFormatException | IOException e) {
-            expectedInfo = read.readString("src/examples/" + directory + "/expected.txt");
+            expectedInfo = read.readString("src/files_matricies/" + directory + "/expected.txt");
         }
     }
 
