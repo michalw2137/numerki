@@ -23,7 +23,7 @@ Program ma umożliwiać wczytanie stablicowanych wartości funkcji oraz umożliw
 
 W sprawozdaniu należy zamieścić przykładowe wykresy. Zbadać w jaki sposób zmiana liczby węzłów wpływa na dokładność interpolacji. Ile węzłów potrzeba do interpolacji wielomianu N-tego stopnia?
 
-- [ ] wczytanie stablicowanych wartości funkcji
+- [x] wczytanie stablicowanych wartości funkcji
 - [ ] wybór funkcji
   - [ ] liniowa
   - [ ] moduł
@@ -31,8 +31,8 @@ W sprawozdaniu należy zamieścić przykładowe wykresy. Zbadać w jaki sposób 
   - [x] trygonometryczna
   - [ ] złożenia ?
 - [x] wybór przedziału interpolacji
-- [ ] położenie węzłów wyliczane z wzoru Czebyszewa
-- [ ] wartości w węzłach wyliczane wybraną funkcją
+- [x] położenie węzłów wyliczane z wzoru Czebyszewa
+- [x] wartości w węzłach wyliczane wybraną funkcją
 - [ ] rysowanie oryginalnego wykresu
 - [ ] rysowanie wielomianu interpolującego
   - [ ] zaznaczyć węzły interpolacji
