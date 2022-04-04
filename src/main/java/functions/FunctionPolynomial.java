@@ -1,16 +1,29 @@
 package functions;
 
-public class FunctionPolynomial extends Function {
+import java.util.ArrayList;
 
+public class FunctionPolynomial extends Function {
+    private int n;
+    private double[] coefficients;
 
     public FunctionPolynomial() {
-        super("x^3 - x^2 -2x + 1 = 0", -20, 20);
+        super("x^3 - x^2 - 2x + 1", -20, 20);
+
+        n = 3;
+        coefficients = new double[]{1, -1, -2, 1};
+    }
+
+    public FunctionPolynomial(int n, double [] coefficients, String formula) {
+        super(formula, -20, 20);
+
+        this.n = n;
+        this.coefficients = coefficients;
     }
 
     @Override
     public double fun(double x) {
-        int[] tab = {1,-1,-2,1};
-//        return x*x*x - x*x - 2*x + 1;
-        return horner(tab, x);
+        return horner(coefficients, x);
     }
+
+
 }

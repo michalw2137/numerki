@@ -17,7 +17,6 @@ public abstract class Function {
         this.right = right;
     }
 
-
     public String getFormula() {
         return formula;
     }
@@ -37,7 +36,7 @@ public abstract class Function {
     public ArrayList<Double> calculateValuesIntoList(double left, double right) {
         ArrayList<Double> values = new ArrayList<>();
         double x = left;
-        while (x < right) {
+        while (x <= right) {
             values.add(fun(x));
             x += increment;
         }
@@ -47,7 +46,7 @@ public abstract class Function {
     public ArrayList<Double> calculateValuesIntoList() {
         ArrayList<Double> values = new ArrayList<>();
         double x = left;
-        while (x < right) {
+        while (x <= right) {
             values.add(fun(x));
             x += increment;
         }
@@ -57,7 +56,7 @@ public abstract class Function {
     public ArrayList<Double> calculateArgumentsIntoList(double left, double right) {
         ArrayList<Double> arguments = new ArrayList<>();
         double x = left;
-        while (x < right) {
+        while (x <= right) {
             arguments.add(x);
             x += increment;
         }
@@ -67,7 +66,7 @@ public abstract class Function {
     public ArrayList<Double> calculateArgumentsIntoList() {
         ArrayList<Double> arguments = new ArrayList<>();
         double x = left;
-        while (x < right) {
+        while (x <= right) {
             arguments.add(x);
             x += increment;
         }
@@ -92,7 +91,7 @@ public abstract class Function {
         view.setVisible(true);
     }
 
-    static double horner(int[] poly, double x) {
+    static double horner(double[] poly, double x) {
         double result = poly[0];
 
         for (int i = 1; i < poly.length; i++)

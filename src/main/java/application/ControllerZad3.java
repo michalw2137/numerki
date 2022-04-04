@@ -63,8 +63,9 @@ public class ControllerZad3 {
                 "7) " + tangent.getFormula()  + "\n" +
 
                 "8) " + exponential.getFormula() + "\n" +
+                "9) custom polynomial" + "\n" +
 
-                "9) exit \n\n" +
+                "0) exit \n\n" +
                 "Your choice (1-5): ");
         while(true) {
             int choice = scanner.nextInt();
@@ -102,6 +103,23 @@ public class ControllerZad3 {
                     return;
                 }
                 case 9 -> {
+                    System.out.println("Enter degree of polynomial:");
+                    int n = scanner.nextInt();
+                    int i = 0;
+                    double[] coefficients = new double[n+1];
+                    while (i <= n) {
+                        System.out.println("Enter coefficient #" + (i+1) + ": ");
+                        coefficients[i] = scanner.nextDouble();
+                        i++;
+                    }
+                    System.out.println("\nYour function:");
+                    System.out.println(makeFormula(n, coefficients));
+                    System.out.println();
+
+                    function = new FunctionPolynomial(n, coefficients, makeFormula(n, coefficients));
+                    return;
+                }
+                case 0 -> {
                     throw new RuntimeException("Program ended by user");
                 }
                 default -> {
@@ -112,6 +130,22 @@ public class ControllerZad3 {
         }
     }
 
+    private static String makeFormula(int n, double[] coefficients) {
+        StringBuilder formula = new StringBuilder();
+        int i = 0;
+        while (i <= n) {
+            if (coefficients[i] > 0) {
+                formula.append("+");
+            }
+            formula.append(coefficients[i])
+                    .append('x')
+                    .append("^")
+                    .append(n-i)
+                    .append(" ");
+            i++;
+        }
+        return formula.toString();
+    }
     private static void readEdges() {
         while (true) {
             try {

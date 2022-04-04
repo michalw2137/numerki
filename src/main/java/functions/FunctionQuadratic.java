@@ -8,7 +8,7 @@ public class FunctionQuadratic extends Function{
 
     @Override
     public double fun(double x) {
-        int[] tab = {2, 3, -7};
+        double[] tab = {2, 3, -7};
         return horner(tab, x);
     }
 }
