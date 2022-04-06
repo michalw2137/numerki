@@ -66,7 +66,7 @@ public class ControllerZad3 {
                 "9) custom polynomial" + "\n" +
 
                 "0) exit \n\n" +
-                "Your choice (1-5): ");
+                "Your choice (0-9): ");
         while(true) {
             int choice = scanner.nextInt();
             switch (choice) {

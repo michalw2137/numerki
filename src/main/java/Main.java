@@ -12,7 +12,7 @@ import java.util.Arrays;
 public class Main {
 
     private static void test(Function function, double a, double b, int n) {
-        ControllerZad3.setFunction(new FunctionSine());
+        ControllerZad3.setFunction(function);
         ControllerZad3.setRange(a, b);
         ControllerZad3.setNodesNumber(n);
         ControllerZad3.doCalculations();
@@ -22,9 +22,9 @@ public class Main {
     public static void main(String[] args) {
 
 //        for (int i = 2; i <= 5; i+=2) {   // TODO: zrobić sprawko, plz użyj tego zamiast ręcznego odpalania programu
-//            test(new FunctionSine(), -10, 10, i);
+//            test(new FunctionCosine(), -10, 10, i);
 //        }
-//        test(new FunctionExponential(), -10, 10, 100);
+//        test(new FunctionCosine(), -10, 10, 100);
 
         while (true) {
             try {
