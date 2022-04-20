@@ -21,7 +21,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-//        for (int i = 2; i <= 5; i+=2) {   // TODO: zrobić sprawko, plz użyj tego zamiast ręcznego odpalania programu
+//        for (int i = 2; i <= 5; i+=2) {
 //            test(new FunctionCosine(), -10, 10, i);
 //        }
 //        test(new FunctionCosine(), -10, 10, 100);
