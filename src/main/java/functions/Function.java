@@ -86,7 +86,7 @@ public abstract class Function {
         var arguments = calculateArgumentsIntoList(left, right);
         var values = calculateValuesIntoList(left, right);
 
-        XYSeriesDemo view = new XYSeriesDemo(getFormula() + ' ' + name, arguments, values, zero);
+        XYSeriesDemo view = new XYSeriesDemo(name, arguments, values, zero);
         view.pack();
         view.setVisible(true);
     }

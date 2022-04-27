@@ -18,7 +18,7 @@ public class XYSeriesDemo extends ApplicationFrame {
 
     public XYSeriesDemo(String title,ArrayList<Double> x, ArrayList<Double> y, double zero) {
 
-        super("wykres"+ title);
+        super("wykres" + title);
 
         final XYSeries series = new XYSeries("f(x)");
 
@@ -50,7 +50,7 @@ public class XYSeriesDemo extends ApplicationFrame {
 
 
         final JFreeChart chart = ChartFactory.createXYLineChart(
-                "Wykres funkcji z algorytmem "+title,
+                 title,
                 "oś X",
                 "oś Y",
                 data,
@@ -107,7 +107,7 @@ public class XYSeriesDemo extends ApplicationFrame {
 
 
         final JFreeChart chart = ChartFactory.createXYLineChart(
-                "Ilość węzłów: "+ number,
+                "Wykres, " + number + " węzłów",
                 "oś X",
                 "oś Y",
                 data,

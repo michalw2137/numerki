@@ -28,19 +28,13 @@ public class ControllerZad4 {
     private static ArrayList<Double> nodesX;
     private static ArrayList<Double> nodesY;
 
-    private static ArrayList<Double> interpolatedX;
-    private static ArrayList<Double> interpolatedY;
-
-    private static ArrayList<Double> interpolatingX;
-    private static ArrayList<Double> interpolatingY;
-
     private static double integral = 0;
 
     private static final Scanner scanner = new Scanner(System.in);
 
     public static void startApp() throws RuntimeException{
         chooseFunction();
-        function.showGraph(function.getFormula(), -1, 1, 0);
+        function.showGraph("wykres bazy", -1, 1, 0);
 
         readNodesNumber();
 
@@ -174,16 +168,7 @@ public class ControllerZad4 {
         nodesX = LaGrange.getNChebyshevNodes(nodesNumber, left, right);
         nodesY = LaGrange.calculateValuesInNodes(nodesNumber, left, right, function);
 
-        //nodesY = LaGrange.calculateValuesInNodesIntegral(nodesNumber, left, right, function);
         LaGrange laGrange = new LaGrange(nodesX, nodesY);
-
-//        interpolatedX = function.calculateArgumentsIntoList(left, right);
-//        interpolatedY = function.calculateValuesIntoList(left, right);
-//
-//
-//
-        interpolatingX = laGrange.calculateArgumentsIntoList(left, right);
-        interpolatingY = laGrange.calculateValuesIntoList(left, right);
 
         for (int i=0; i<nodesNumber; i++) {
             integral += (PI / (nodesNumber+1)) * laGrange.fun(nodesX.get(i));
@@ -197,21 +182,16 @@ public class ControllerZad4 {
 
     public static void showResults() {
         LaGrange laGrange = new LaGrange(nodesX, nodesY);
+
         ArrayList<Double> xs = new ArrayList<>();
         ArrayList<Double> ys = new ArrayList<>();
-        for(double x=left+0.1; x<right; x+=0.1) {
+
+        for(double x=left+0.11; x<right; x+=0.1) {
             xs.add(x);
             ys.add(laGrange.fun(x) / sqrt(1 - x*x));
         }
-        System.out.println(xs.size());
-        System.out.println(xs);
-        System.out.println(ys.size());
-        System.out.println(ys);
-        System.out.println(interpolatingX.size());
-        System.out.println(interpolatingX);
-        System.out.println(interpolatingY.size());
-        System.out.println(interpolatingY);
-        XYSeriesDemo view = new XYSeriesDemo(interpolatingX, interpolatingY, xs, ys, nodesX, nodesY);
+
+        XYSeriesDemo view = new XYSeriesDemo("Wykres funkcji pocałkowej p(x)*f(x)", xs, ys, 0);
         view.pack();
         view.setVisible(true);
     }
