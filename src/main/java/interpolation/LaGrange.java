@@ -6,11 +6,13 @@ import java.util.ArrayList;
 
 import static java.lang.Math.PI;
 import static java.lang.Math.cos;
+import static java.lang.Math.sqrt;
 
-public class LaGrange extends Function{
+public class LaGrange extends Function {
 
     private ArrayList<Double> args;
     private ArrayList<Double> vals;
+
 
     public LaGrange(ArrayList<Double> args, ArrayList<Double> vals) {
         super("interpolating polynomial", -5, 5);
@@ -42,6 +44,15 @@ public class LaGrange extends Function{
         ArrayList<Double> values = new ArrayList<>();
         for (double node: nodes) {
             values.add(function.fun(node));
+        }
+        return values;
+    }
+
+    public static ArrayList<Double> calculateValuesInNodesIntegral(int n, double a, double b, Function function) {
+        var nodes = getNChebyshevNodes(n, a, b);
+        ArrayList<Double> values = new ArrayList<>();
+        for (double node: nodes) {
+            values.add(function.fun(node) / sqrt(1 - node*node));
         }
         return values;
     }

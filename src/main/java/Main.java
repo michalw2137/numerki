@@ -1,6 +1,7 @@
 import application.ControllerZad1;
 import application.ControllerZad2;
 import application.ControllerZad3;
+import application.ControllerZad4;
 import functions.*;
 import interpolation.LaGrange;
 import view.XYSeriesDemo;
@@ -28,13 +29,27 @@ public class Main {
 
         while (true) {
             try {
-                ControllerZad3.startApp();
+                ControllerZad4.startApp();
             }
-        catch (RuntimeException e) {
+            catch (RuntimeException e) {
                 System.out.println("Program ended by user");
+
+                System.out.println(e.getMessage());
+                System.out.println(e);
+                System.out.println(Arrays.toString(e.getStackTrace()));
                 return;
             }
         }
+
+//        while (true) {
+//            try {
+//                ControllerZad3.startApp();
+//            }
+//        catch (RuntimeException e) {
+//                System.out.println("Program ended by user");
+//                return;
+//            }
+//        }
 
 //        while (true) {
 //            try {
