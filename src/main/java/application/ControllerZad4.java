@@ -9,19 +9,21 @@ import functions.FunctionPolynomial;
 import functions.FunctionQuadratic;
 import functions.FunctionSine;
 import functions.FunctionTangent;
+import integration.NewtonCotess;
 import interpolation.LaGrange;
 import view.XYSeriesDemo;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-import static java.lang.Math.PI;
-import static java.lang.Math.sqrt;
+import static java.lang.Math.*;
 
 public class ControllerZad4 {
 
-    private static final double left = -1, right = 1;
+    private static double left = -1;
+    private static double right = 1;
     private static Function function;
     private static int nodesNumber;
 
@@ -32,17 +34,68 @@ public class ControllerZad4 {
 
     private static final Scanner scanner = new Scanner(System.in);
 
-    public static void startApp() throws RuntimeException{
-        chooseFunction();
-        function.showGraph("wykres bazy", -1, 1, 0);
+    public static void startApp() throws RuntimeException {
+        String choice = "1";
+        System.out.println("choose: \n 1) newton-cotess \n 2) gauss-chebyszev");
+        choice = scanner.nextLine();
 
-        readNodesNumber();
+        if (choice.equals("1")) {
+            chooseFunction();
+            function.showGraph();
+            readEdges();
+            System.out.println("Integral calculated using simple Newton-Cotess : " + calculateNewton(left, right));
 
-        doCalculations();
-        System.out.println("Integral = " + integral);
-        showResults();
+            ArrayList<Double> integrals = new ArrayList<>();
+            integrals.add(1000.);
+            integrals.add(500.);
+            int n=1;
+            double epsilon = 0.001;
 
-        System.out.println("\n======== CALCULATIONS PERFORMED SUCCESFULLY ========\n");
+//            boolean repeat = true;
+            while (abs(integrals.get(integrals.size() - 2) - integrals.get(integrals.size() - 1)) > epsilon) {
+//                try {
+//                    repeat = integrals.get(integrals.size() - 1) - integrals.get(integrals.size() - 2) < epsilon;
+//                    System.out.println("delta = " + (integrals.get(integrals.size() - 1) - integrals.get(integrals.size() - 2)) + ", repeat = " + repeat);
+//                } catch (IndexOutOfBoundsException e) {
+//                    repeat = true;
+//                }
+                integrals.add(NewtonCotess.complexSimpson(n, left, right, function));
+//                System.out.println("loop");
+                System.out.println("n=" + n + ", I=" + integrals.get(integrals.size()-1));
+                n++;
+            }
+            function.showGraph("Integrated function", left, right, 0);
+        }
+
+        if (choice.equals("2")) {
+            chooseFunction();
+
+            ArrayList<Double> xs = new ArrayList<>();
+            ArrayList<Double> ys = new ArrayList<>();
+
+            for(double x=left+0.01; x<right; x+=0.01) {
+                xs.add(x);
+                ys.add(function.fun(x) / sqrt(1 - x*x));
+            }
+
+            XYSeriesDemo view = new XYSeriesDemo("Integrated function p(x)*f(x)", xs, ys, 0);
+            view.pack();
+            view.setVisible(true);
+
+            readNodesNumber();
+
+            doCalculations();
+            System.out.println("Integral = " + integral);
+            showResults();
+
+            System.out.println("\n======== CALCULATIONS PERFORMED SUCCESFULLY ========\n");
+
+        }
+    }
+
+    private static double calculateNewton(double a, double b) {
+        double E = 0;
+        return (b-a)/6 * (function.fun(a) + 4*function.fun((a+b)/2) + function.fun(b)) + E;
     }
 
     static void chooseFunction() throws RuntimeException{
@@ -130,6 +183,33 @@ public class ControllerZad4 {
         }
     }
 
+    private static void readEdges() {
+        while (true) {
+            try {
+                tryToReadEdges();
+                return;
+            } catch (IOException | RuntimeException e) {
+                System.out.println(e.getMessage() + '\n');
+            }
+        }
+    }
+
+    private static void tryToReadEdges () throws IOException, RuntimeException {
+        System.out.print("Enter left edge: ");
+        left = scanner.nextDouble();
+
+        System.out.print("Enter right edge: ");
+        right = scanner.nextDouble();
+
+        if (left >= right) {
+            throw new IOException("Invalid range!");
+        }
+
+        System.out.println("\nselected range: <" + left + ", " + right + ">");
+        System.out.println();
+
+    }
+
     private static void readNodesNumber() {
         while (true) {
             try {
@@ -186,12 +266,12 @@ public class ControllerZad4 {
         ArrayList<Double> xs = new ArrayList<>();
         ArrayList<Double> ys = new ArrayList<>();
 
-        for(double x=left+0.11; x<right; x+=0.1) {
+        for(double x=left+0.01; x<right; x+=0.01) {
             xs.add(x);
             ys.add(laGrange.fun(x) / sqrt(1 - x*x));
         }
 
-        XYSeriesDemo view = new XYSeriesDemo("Wykres funkcji pocałkowej p(x)*f(x)", xs, ys, 0);
+        XYSeriesDemo view = new XYSeriesDemo("Interpolated function p(x)*f(x)", xs, ys, 0);
         view.pack();
         view.setVisible(true);
     }
