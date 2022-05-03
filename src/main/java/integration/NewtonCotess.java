@@ -4,6 +4,8 @@ import functions.Function;
 
 import java.util.ArrayList;
 
+import static java.lang.Math.abs;
+
 public class NewtonCotess {
 
     public static ArrayList<Double> getNSubsetsInRange(int n, double a, double b) {
@@ -24,14 +26,22 @@ public class NewtonCotess {
         return (b-a)/6 * (f.fun(a) + 4* f.fun((a+b)/2) + f.fun(b)) + E;
     }
 
-    public static double calculateLimitRight(double epsilon, Function f) {
+    public static double calculateIntegral(double epsilon, Function F) {
+        double sum = 0;
+        int n=1;
+        sum += NewtonCotess.calculateLimitLeft(n, epsilon, F);
+        sum += NewtonCotess.calculateLimitRight(n, epsilon, F);
+        return sum;
+    }
+
+    public static double calculateLimitRight(int n, double epsilon, Function f) {
         double sum = 0;
         int  i = 2;
         double a = 0;
         double b = 1./i;
         double integral = simpleSimpson(a, b, f);
         while (integral > epsilon) {
-            integral = simpleSimpson(a, b, f);
+            integral = complexSimpson(n, a, b, f);
             sum += integral;
             i *= 2;
 
@@ -41,14 +51,14 @@ public class NewtonCotess {
         return sum;
     }
 
-    public static double calculateLimitLeft(double epsilon, Function f) {
+    public static double calculateLimitLeft(int n, double epsilon, Function f) {
         double sum = 0;
         int  i = 2;
         double a = 0;
         double b = -1./i;
         double integral = simpleSimpson(b, a, f);
-        while (integral > epsilon) {
-            integral = simpleSimpson(b, a, f);
+        while (abs(integral) > epsilon) {
+            integral = complexSimpson(n, b, a, f);
             sum += integral;
             i *= 2;
 
@@ -93,7 +103,7 @@ public class NewtonCotess {
         double length = b-a;
         double h = length / (n+1);
 //        System.out.println("simpson");
-        System.out.println();
+//        System.out.println();
         return sum * h / 3;
     }
 }

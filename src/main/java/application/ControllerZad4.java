@@ -35,10 +35,7 @@ public class ControllerZad4 {
         System.out.println("Enter epsilon: ");
         double epsilon = scanner.nextDouble();
 
-        double sum = 0;
-        sum += NewtonCotess.calculateLimitLeft(epsilon, F);
-        sum += NewtonCotess.calculateLimitRight(epsilon, F);
-        System.out.println("Integral calculated using limits (complex Simpson): " + sum);
+        System.out.println("Integral calculated using limits (complex Simpson): " + NewtonCotess.calculateIntegral(epsilon, F));
 
         for (nodesNumber = 2; nodesNumber <= 5; nodesNumber++) {
             doCalculations();
@@ -57,10 +54,10 @@ public class ControllerZad4 {
 
         System.out.println("CHOOSE FUNCTION:");
         System.out.println(
-                "1) " + modulo.getFormula()  + "\n" +
-                "2) " + linear.getFormula()  + "\n" +
-                "3) " + quadratic.getFormula()  + "\n" +
-                "4) " + polynomial.getFormula() + "\n" +
+                "1) " + modulo.getFormula()  + ", I = 2\n" +
+                "2) " + linear.getFormula()  + ", I = pi ~ 3,1416\n" +
+                "3) " + quadratic.getFormula()  + ", I = -6pi ~ -18,85\n" +
+                "4) " + polynomial.getFormula() + ", I = pi/2 ~ 1,57\n" +
 
                 "0) exit \n\n" +
                 "Your choice (1-4): ");
