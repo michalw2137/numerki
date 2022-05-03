@@ -1,6 +1,7 @@
 package application;
 
 import functions.*;
+import integration.GaussChebyshev;
 import integration.NewtonCotess;
 import interpolation.LaGrange;
 import view.XYSeriesDemo;
@@ -38,9 +39,8 @@ public class ControllerZad4 {
         System.out.println("Integral calculated using limits (complex Simpson): " + NewtonCotess.calculateIntegral(epsilon, F));
 
         for (nodesNumber = 2; nodesNumber <= 5; nodesNumber++) {
-            doCalculations();
-            System.out.println("Integral [" + nodesNumber + " nodes] = " + integral);
-            showResults();
+//            System.out.println(f.getFormula());
+            System.out.println("Integral [" + nodesNumber + " nodes] = " + GaussChebyshev.calculateIntegral(nodesNumber, f));
         }
 
         System.out.println("\n======== CALCULATIONS PERFORMED SUCCESFULLY ========\n");
