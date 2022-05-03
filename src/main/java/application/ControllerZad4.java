@@ -3,6 +3,7 @@ package application;
 import functions.*;
 import integration.GaussChebyshev;
 import integration.NewtonCotess;
+import integration.Simpson;
 import interpolation.LaGrange;
 import view.XYSeriesDemo;
 
@@ -36,11 +37,12 @@ public class ControllerZad4 {
         System.out.println("Enter epsilon: ");
         double epsilon = scanner.nextDouble();
 
-        System.out.println("Integral calculated using limits (complex Simpson): " + NewtonCotess.calculateIntegral(epsilon, F));
+        System.out.println("Integral calculated using limits (complex Simpson): " + Simpson.granicaSimpsona(F, epsilon));
 
         for (nodesNumber = 2; nodesNumber <= 5; nodesNumber++) {
 //            System.out.println(f.getFormula());
             System.out.println("Integral [" + nodesNumber + " nodes] = " + GaussChebyshev.calculateIntegral(nodesNumber, f));
+
         }
 
         System.out.println("\n======== CALCULATIONS PERFORMED SUCCESFULLY ========\n");
