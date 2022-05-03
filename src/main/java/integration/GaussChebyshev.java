@@ -14,7 +14,6 @@ public class GaussChebyshev {
         System.out.println();
         for (int i=1; i<=n; i++) {
             sum += (A(i) * f.fun(x(i)));
-
         }
         return sum;
     }

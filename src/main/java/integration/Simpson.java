@@ -6,7 +6,7 @@ import static java.lang.Math.abs;
 
 public class Simpson {
 
-    public static double calkaSimpsona(Function f, double a, double b, double epsilon) {
+    public static double integral (Function f, double a, double b, double epsilon) {
         double sum = 0;
         double oldSum = 0;
         double h = 0;
@@ -28,7 +28,7 @@ public class Simpson {
         return sum;
     }
 
-    public static double granicaSimpsona(Function f, double epsilon) {
+    public static double limit (Function f, double epsilon) {
         double integral = 0;
         double sum = 0;
 
@@ -36,7 +36,7 @@ public class Simpson {
         double b = 0.5;
         int i = 4;
         do {
-            integral = calkaSimpsona(f, a, b, epsilon);
+            integral = integral(f, a, b, epsilon);
             sum += integral;
             a = b;
             b += 1./i;
@@ -47,7 +47,7 @@ public class Simpson {
         b = 0;
         i = 4;
         do {
-            integral = calkaSimpsona(f, a, b, epsilon);
+            integral = integral(f, a, b, epsilon);
             sum += integral;
             b = a;
             a -= 1./i;
