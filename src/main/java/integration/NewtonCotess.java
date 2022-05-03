@@ -29,8 +29,20 @@ public class NewtonCotess {
     public static double calculateIntegral(double epsilon, Function F) {
         double sum = 0;
         int n=1;
-        sum += NewtonCotess.calculateLimitLeft(n, epsilon, F);
-        sum += NewtonCotess.calculateLimitRight(n, epsilon, F);
+        double oldSum = 10;
+
+        while (abs(oldSum - sum) > epsilon) {
+            oldSum = sum;
+            sum = 0;
+            sum += NewtonCotess.calculateLimitLeft(n, epsilon, F);
+            sum += NewtonCotess.calculateLimitRight(n, epsilon, F);
+            n++;
+//            System.out.println("SUM = " + sum);
+//            System.out.println("OLD SUM = " + oldSum);
+//            System.out.println("DIFF = " + abs(oldSum - sum));
+//            System.out.println();
+        }
+        System.out.println("EPSILON REACHED FOR N = " + n + " SUBSETS");
         return sum;
     }
 
