@@ -1,14 +1,6 @@
 package application;
 
-import functions.Function;
-import functions.FunctionCosine;
-import functions.FunctionExponential;
-import functions.FunctionLinear;
-import functions.FunctionModulo;
-import functions.FunctionPolynomial;
-import functions.FunctionQuadratic;
-import functions.FunctionSine;
-import functions.FunctionTangent;
+import functions.*;
 import integration.NewtonCotess;
 import interpolation.LaGrange;
 import view.XYSeriesDemo;
@@ -24,7 +16,8 @@ public class ControllerZad4 {
 
     private static double left = -1;
     private static double right = 1;
-    private static Function function;
+    private static Function f;
+    private static Function F;
     private static int nodesNumber;
 
     private static ArrayList<Double> nodesX;
@@ -35,150 +28,69 @@ public class ControllerZad4 {
     private static final Scanner scanner = new Scanner(System.in);
 
     public static void startApp() throws RuntimeException {
-        String choice = "1";
-        System.out.println("choose: \n 1) newton-cotess \n 2) gauss-chebyszev");
-        choice = scanner.nextLine();
+        chooseFunction();
 
-        if (choice.equals("1")) {
-            chooseFunction();
-            function.showGraph();
-            readEdges();
-            System.out.println("Integral calculated using simple Newton-Cotess : " + calculateNewton(left, right));
+        F.showGraph();
 
-            ArrayList<Double> integrals = new ArrayList<>();
-            integrals.add(1000.);
-            integrals.add(500.);
-            int n=1;
-            double epsilon = 0.001;
+        System.out.println("Enter epsilon: ");
+        double epsilon = scanner.nextDouble();
 
-//            boolean repeat = true;
-            while (abs(integrals.get(integrals.size() - 2) - integrals.get(integrals.size() - 1)) > epsilon) {
-//                try {
-//                    repeat = integrals.get(integrals.size() - 1) - integrals.get(integrals.size() - 2) < epsilon;
-//                    System.out.println("delta = " + (integrals.get(integrals.size() - 1) - integrals.get(integrals.size() - 2)) + ", repeat = " + repeat);
-//                } catch (IndexOutOfBoundsException e) {
-//                    repeat = true;
-//                }
-                integrals.add(NewtonCotess.complexSimpson(n, left, right, function));
-//                System.out.println("loop");
-                System.out.println("n=" + n + ", I=" + integrals.get(integrals.size()-1));
-                n++;
-            }
-            function.showGraph("Integrated function", left, right, 0);
-        }
+        double sum = 0;
+        sum += NewtonCotess.calculateLimitLeft(epsilon, F);
+        sum += NewtonCotess.calculateLimitRight(epsilon, F);
+        System.out.println("Integral calculated using limits (complex Simpson): " + sum);
 
-        if (choice.equals("2")) {
-            chooseFunction();
-
-            ArrayList<Double> xs = new ArrayList<>();
-            ArrayList<Double> ys = new ArrayList<>();
-
-            for(double x=left+0.01; x<right; x+=0.01) {
-                xs.add(x);
-                ys.add(function.fun(x) / sqrt(1 - x*x));
-            }
-
-            XYSeriesDemo view = new XYSeriesDemo("Integrated function p(x)*f(x)", xs, ys, 0);
-            view.pack();
-            view.setVisible(true);
-
-            readNodesNumber();
-
+        for (nodesNumber = 2; nodesNumber <= 5; nodesNumber++) {
             doCalculations();
-            System.out.println("Integral = " + integral);
+            System.out.println("Integral [" + nodesNumber + " nodes] = " + integral);
             showResults();
-
-            System.out.println("\n======== CALCULATIONS PERFORMED SUCCESFULLY ========\n");
-
         }
-    }
 
-    private static double calculateNewton(double a, double b) {
-        double E = 0;
-        return (b-a)/6 * (function.fun(a) + 4*function.fun((a+b)/2) + function.fun(b)) + E;
+        System.out.println("\n======== CALCULATIONS PERFORMED SUCCESFULLY ========\n");
     }
 
     static void chooseFunction() throws RuntimeException{
-        var polynomial = new FunctionPolynomial();
-        var exponential = new FunctionExponential();
-        var sine = new FunctionSine();
-        var cosine = new FunctionCosine();
-        var tangent = new FunctionTangent();
-        var linear = new FunctionLinear();
         var modulo = new FunctionModulo();
+        var linear = new FunctionLinear();
         var quadratic = new FunctionQuadratic();
+        var polynomial = new FunctionPolynomial();
 
         System.out.println("CHOOSE FUNCTION:");
         System.out.println(
                 "1) " + modulo.getFormula()  + "\n" +
-                        "2) " + linear.getFormula()  + "\n" +
-                        "3) " + quadratic.getFormula()  + "\n" +
-                        "4) " + polynomial.getFormula() + "\n" +
+                "2) " + linear.getFormula()  + "\n" +
+                "3) " + quadratic.getFormula()  + "\n" +
+                "4) " + polynomial.getFormula() + "\n" +
 
-                        "5) " + sine.getFormula() + "\n" +
-                        "6) " + cosine.getFormula() + "\n" +
-                        "7) " + tangent.getFormula()  + "\n" +
-
-                        "8) " + exponential.getFormula() + "\n" +
-                        "9) custom polynomial" + "\n" +
-
-                        "0) exit \n\n" +
-                        "Your choice (0-9): ");
+                "0) exit \n\n" +
+                "Your choice (1-4): ");
         while(true) {
             int choice = scanner.nextInt();
             switch (choice) {
                 case 1 -> {
-                    function = modulo;
+                    f = modulo;
+                    F = new WeightModulo();
                     return;
                 }
                 case 2 -> {
-                    function = linear;
+                    f = linear;
+                    F = new WeightLinear();
                     return;
                 }
                 case 3 -> {
-                    function = quadratic;
+                    f = quadratic;
+                    F = new WeightQuadratic();
                     return;
                 }
                 case 4 -> {
-                    function = polynomial;
+                    f = polynomial;
+                    F = new WeightPolynomial();
                     return;
                 }
-                case 5 -> {
-                    function = sine;
-                    return;
-                }
-                case 6 -> {
-                    function = cosine;
-                    return;
-                }
-                case 7 -> {
-                    function = tangent;
-                    return;
-                }
-                case 8 -> {
-                    function = exponential;
-                    return;
-                }
-                case 9 -> {
-                    System.out.println("Enter degree of polynomial:");
-                    int n = scanner.nextInt();
-                    int i = 0;
-                    double[] coefficients = new double[n+1];
-                    while (i <= n) {
-                        System.out.println("Enter coefficient #" + (i+1) + ": ");
-                        coefficients[i] = scanner.nextDouble();
-                        i++;
-                    }
-                    System.out.println("\nYour function:");
-                    System.out.println(makeFormula(n, coefficients));
-                    System.out.println();
 
-                    function = new FunctionPolynomial(n, coefficients, makeFormula(n, coefficients));
-                    return;
-                }
                 case 0 -> throw new RuntimeException("Program ended by user");
                 default -> System.out.println( "CHOOSE CORRECT ONE!" + '\n' +
-                        "Your choice (1-5): ");
+                        "Your choice (1-4): ");
             }
         }
     }
@@ -246,17 +158,17 @@ public class ControllerZad4 {
 
     public static void doCalculations() {
         nodesX = LaGrange.getNChebyshevNodes(nodesNumber, left, right);
-        nodesY = LaGrange.calculateValuesInNodes(nodesNumber, left, right, function);
+        nodesY = LaGrange.calculateValuesInNodes(nodesNumber, left, right, f);
 
         LaGrange laGrange = new LaGrange(nodesX, nodesY);
-
+        integral = 0;
         for (int i=0; i<nodesNumber; i++) {
             integral += (PI / (nodesNumber+1)) * laGrange.fun(nodesX.get(i));
-            System.out.println("A" + i + " = " + (PI / (nodesNumber+1)));
-            System.out.println("x" + i + " = " + nodesX.get(i));
-            System.out.println("A*x = " + (PI / (nodesNumber+1)) * nodesX.get(i));
+//            System.out.println("A" + i + " = " + (PI / (nodesNumber+1)));
+//            System.out.println("x" + i + " = " + nodesX.get(i));
+//            System.out.println("A*x = " + (PI / (nodesNumber+1)) * nodesX.get(i));
 
-            System.out.println();
+//            System.out.println();
         }
     }
 
@@ -271,13 +183,13 @@ public class ControllerZad4 {
             ys.add(laGrange.fun(x) / sqrt(1 - x*x));
         }
 
-        XYSeriesDemo view = new XYSeriesDemo("Interpolated function p(x)*f(x)", xs, ys, 0);
+        XYSeriesDemo view = new XYSeriesDemo("Interpolated function p(x)*f(x) " + nodesNumber + " nodes", xs, ys, 0);
         view.pack();
         view.setVisible(true);
     }
 
-    public static void setFunction (Function function) {
-        ControllerZad4.function = function;
+    public static void setF(Function f) {
+        ControllerZad4.f = f;
     }
 
     public static void setNodesNumber(int nodesNumber) {

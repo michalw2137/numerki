@@ -3,8 +3,8 @@ package functions;
 import java.util.ArrayList;
 
 public class FunctionPolynomial extends Function {
-    private int n;
-    private double[] coefficients;
+    private final int n;
+    private final double[] coefficients;
 
     public FunctionPolynomial() {
         super("x^3 - x^2 - 2x + 1", -20, 20);
