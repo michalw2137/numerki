@@ -16,7 +16,7 @@ public class ControllerZad5 {
     private static int n; // degree of polynomial
     private static double epsilon;
 
-    public static void startApp() {
+    public static void startApp(int n) {
 //        function = Controller.chooseFunction();
 //        function.showGraph();
 //
@@ -30,11 +30,11 @@ public class ControllerZad5 {
 //
 //        epsilon = Controller.readDouble("Enter integration precision: ");
         function = new FunctionQuadratic();
-        a = -10;
-        b = 10;
-        n = 2;
+        a = -4;
+        b = 4;
+        //n = 2;
         epsilon = 0.1;
-        function.showGraph(function.getFormula(), a, b, 0);
+        //function.showGraph(function.getFormula(), a, b, 0);
         Hermite.generateNPolynomials(n);
         double[] c = new double[n+1];
 
@@ -53,15 +53,16 @@ public class ControllerZad5 {
             System.out.println("c" + (n-i) + " = " + c[n-i]);
             System.out.println();
         }
-
+        System.out.print("C ====================== ");
         for (double ci : c) {
             System.out.print(ci + "\t");
         }
-
+        System.out.println();
+        System.out.println();
         Function F = new FunctionPolynomial(c.length, c, Controller.makeFormula(n, c));
-        F.showGraph(F.getFormula(), a, b, 0);
+        //F.showGraph(F.getFormula(), a, b, 0);
 
-        Controller.graph2Functions(function, F, a, b);
+        //Controller.graph2Functions(function, F, a, b);
 
     }
 }
