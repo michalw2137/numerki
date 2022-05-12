@@ -12,7 +12,7 @@ public class Simpson {
         double h = 0;
         int n = 1;
         int j = 0;
-        System.out.println("f = "+f.getFormula());
+        //System.out.println("f = "+f.getFormula());
 
         do {
             n = 100; //n * 2;

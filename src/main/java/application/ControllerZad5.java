@@ -9,6 +9,7 @@ import functions.FxF;
 import integration.Simpson;
 
 import javax.lang.model.util.SimpleAnnotationValueVisitor6;
+import java.util.Arrays;
 
 public class ControllerZad5 {
     private static Function function;
@@ -40,29 +41,49 @@ public class ControllerZad5 {
 
         for(int i = 0; i <= n; i++) {
             int[] factors = Hermite.getNthPolynomial(i);
+            System.out.println(Arrays.toString(factors));
             Function Hn = new FunctionPolynomial(factors.length, factors, Controller.makeFormula(factors, i));
-            System.out.println("H" + i + " = " + Controller.makeFormula(factors, i));
+            //System.out.println("H" + i + " = " + Controller.makeFormula(factors, i));
 
             double fI = Simpson.integral(new FxF(function, Hn), a, b, epsilon);
-            System.out.println("integral f*g= " + fI);
+            //System.out.println("integral f*g= " + fI);
 
             double HnI = Simpson.integral(new FxF(Hn, Hn), a, b, epsilon);
-            System.out.println("integral g*g= " + HnI);
+            //System.out.println("integral g*g= " + HnI);
 
             c[n-i] = fI / HnI;
-            System.out.println("c" + (n-i) + " = " + c[n-i]);
-            System.out.println();
+            //System.out.println("c" + (n-i) + " = " + c[n-i]);
+            //System.out.println();
         }
-        System.out.print("C ====================== ");
-        for (double ci : c) {
-            System.out.print(ci + "\t");
+
+        for(int i = 0; i <= n; i++) {
+            System.out.println(c[i] +"\t"+ Arrays.toString(Hermite.getNthPolynomial(i)));
         }
         System.out.println();
         System.out.println();
-        Function F = new FunctionPolynomial(c.length, c, Controller.makeFormula(n, c));
+
+        double[] solution = new double[n+1];
+        for (int i=0; i<=n; i++) {
+            for (int ii=0; ii<=n; ii++) {
+                try {
+                    double p = Hermite.getNthPolynomial(ii)[ii-i];
+                    double ci = c[i];
+                    solution[i] += p * ci;
+                    //System.out.print(ii+","+(ii-i)+"\t");
+                } catch (ArrayIndexOutOfBoundsException ignored){}
+
+            }
+            //System.out.println();
+
+        }
+
+        for (double s: solution) {
+            System.out.println(s);
+        }
+
         //F.showGraph(F.getFormula(), a, b, 0);
 
-        Controller.graph2Functions(function, F, a, b);
+        //Controller.graph2Functions(function, F, a, b);
 
     }
 }

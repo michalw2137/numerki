@@ -25,11 +25,11 @@ public class Hermite {
         int[] Hn = Hn(n);
         int i=0;
         int j=0;
-        while (i<n) {
+        while (i<=n) {
             poly[i] = Hn[j];
             i++;
             j++;
-            if (i<n) {
+            if (i<=n) {
                 poly[i] = 0;
                 i++;
             }
