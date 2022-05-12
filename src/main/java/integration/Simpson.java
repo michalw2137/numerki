@@ -12,8 +12,10 @@ public class Simpson {
         double h = 0;
         int n = 1;
         int j = 0;
+        System.out.println("f = "+f.getFormula());
+
         do {
-            n = n * 2;
+            n = 100; //n * 2;
             h = (b-a) / n;
             oldSum = sum;
             sum = 0;
@@ -22,8 +24,15 @@ public class Simpson {
             for (int i = 1; i < n; i += 2) {
                 sum += 4 * f.fun(a + (i) * h);
                 sum += 2 * f.fun(a + (i + 1) * h);
+
+//                System.out.println("\n f("+(a + (i) * h)+") = "+f.fun(a + (i) * h));
+//                System.out.println(" f("+(a + (i+1) * h)+") = "+f.fun(a + (i+1) * h));
+
             }
             sum *= h / 3;
+//            System.out.println("\nold sum= "+oldSum);
+//            System.out.println("sum= "+sum);
+
             j ++;
         } while (abs(oldSum - sum) > epsilon);
 //        System.out.println(j);

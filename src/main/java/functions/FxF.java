@@ -5,7 +5,7 @@ public class FxF extends Function{
     private final Function f2;
 
     public FxF (Function f1, Function f2) {
-        super("f(x)*g(x)", -10, 10);
+        super("("+f1.getFormula()+") * ("+f2.getFormula()+")", -10, 10);
         this.f1 = f1;
         this.f2 = f2;
     }

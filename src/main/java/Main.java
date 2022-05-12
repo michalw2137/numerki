@@ -35,9 +35,10 @@ public class Main {
 //            test(new FunctionCosine(), -10, 10, i);
 //        }
 //        test(new FunctionCosine(), -10, 10, 100);
-        for(int i=2; i<6; i++) {
-            ControllerZad5.startApp(i);
-        }
+//        ControllerZad5.startApp(1);
+        ControllerZad5.startApp(2);
+//        ControllerZad5.startApp(3);
+
 
 
 

@@ -30,17 +30,17 @@ public class ControllerZad5 {
 //
 //        epsilon = Controller.readDouble("Enter integration precision: ");
         function = new FunctionQuadratic();
-        a = -4;
-        b = 4;
+        a = -2;
+        b = 2;
         //n = 2;
-        epsilon = 0.1;
+        epsilon = 0.01;
         //function.showGraph(function.getFormula(), a, b, 0);
         Hermite.generateNPolynomials(n);
         double[] c = new double[n+1];
 
         for(int i = 0; i <= n; i++) {
             int[] factors = Hermite.getNthPolynomial(i);
-            Function Hn = new FunctionPolynomial(factors.length, factors, "H" + i);
+            Function Hn = new FunctionPolynomial(factors.length, factors, Controller.makeFormula(factors, i));
             System.out.println("H" + i + " = " + Controller.makeFormula(factors, i));
 
             double fI = Simpson.integral(new FxF(function, Hn), a, b, epsilon);
@@ -62,7 +62,7 @@ public class ControllerZad5 {
         Function F = new FunctionPolynomial(c.length, c, Controller.makeFormula(n, c));
         //F.showGraph(F.getFormula(), a, b, 0);
 
-        //Controller.graph2Functions(function, F, a, b);
+        Controller.graph2Functions(function, F, a, b);
 
     }
 }
