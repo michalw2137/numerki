@@ -9,8 +9,11 @@ import functions.FunctionPolynomial;
 import functions.FunctionQuadratic;
 import functions.FunctionSine;
 import functions.FunctionTangent;
+import interpolation.LaGrange;
+import view.XYSeriesDemo;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -198,6 +201,23 @@ public class Controller {
             }
         }
     }
+
+    public static void graph2Functions(Function f1, Function f2, double a, double b) {
+        ArrayList<Double> x1 = f1.calculateArgumentsIntoList(a, b);
+        ArrayList<Double> y1 = f1.calculateValuesIntoList(a, b);
+
+        ArrayList<Double>  x2 = f2.calculateArgumentsIntoList(a, b);
+        ArrayList<Double>  y2 = f2.calculateValuesIntoList(a, b);
+
+        ArrayList<Double> nodesX = new ArrayList<>(){{add(0.);}};
+        ArrayList<Double> nodesY = new ArrayList<>(){{add(0.);}};
+
+        XYSeriesDemo view = new XYSeriesDemo(x1, y1, x2, y2, nodesX, nodesY);
+        view.pack();
+        view.setVisible(true);
+    }
+
+
 
 
 }
