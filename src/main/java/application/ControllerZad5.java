@@ -17,5 +17,6 @@ public class ControllerZad5 {
 
         n = Controller.readInt("Enter degree of polynomial: ");
         epsilon = Controller.readDouble("Enter integration precision: ");
+
     }
 }
