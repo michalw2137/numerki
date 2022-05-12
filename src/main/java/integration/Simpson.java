@@ -11,7 +11,7 @@ public class Simpson {
         double oldSum = 0;
         double h = 0;
         int n = 1;
-
+        int j = 0;
         do {
             n = n * 2;
             h = (b-a) / n;
@@ -24,7 +24,9 @@ public class Simpson {
                 sum += 2 * f.fun(a + (i + 1) * h);
             }
             sum *= h / 3;
+            j ++;
         } while (abs(oldSum - sum) > epsilon);
+        System.out.println(j);
         return sum;
     }
 

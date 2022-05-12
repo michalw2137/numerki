@@ -29,7 +29,7 @@ public class Main {
 
         while (true) {
             try {
-                ControllerZad4.startApp();
+                ControllerZad1.startApp();
             }
             catch (RuntimeException e) {
                 System.out.println("Program ended by user");

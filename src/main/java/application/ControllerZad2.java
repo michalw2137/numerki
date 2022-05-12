@@ -45,9 +45,14 @@ public class ControllerZad2 {
 
         printInfo();
 
-        readEndingCondition();
+        endByApproximation = Controller.endByApproximation();
 
-        readEndingValue();
+        if (endByApproximation) {
+            epsilon = Controller.readDouble("Enter epsilon: ");
+
+        } else {
+            iterations = Controller.readInt("Enter iterations number: ");
+        }
 
         calculateSolutions();
 
@@ -108,27 +113,9 @@ public class ControllerZad2 {
         System.out.println();
     }
 
-    private static void readEndingCondition () {
-        System.out.print("End by iterations(1) or epsilon(2)?: ");
-        int answer = scanner.nextInt();
-        endByApproximation = answer == 2;
-    }
-
-    private static void readEndingValue () {
-        if (endByApproximation) {
-            System.out.println("Enter epsilon: ");
-            epsilon = scanner.nextDouble();
-
-        } else {
-            System.out.println("Enter number of iterations: ");
-            iterations = scanner.nextInt();
-        }
-    }
-
     public static void calculateSolutions () {
         if (endByApproximation) {
             solution = Jacobi.approximity(A, x, b, epsilon);
-
         } else {
             solution = Jacobi.iterations(A, x, b, iterations);
         }
@@ -147,6 +134,12 @@ public class ControllerZad2 {
 
         System.out.println("========================================================================================================================");
     }
+
+
+
+
+
+
 
     public static void setIterations (int iterations) {
         ControllerZad2.endByApproximation = false;
