@@ -2,6 +2,8 @@ import application.ControllerZad1;
 import application.ControllerZad2;
 import application.ControllerZad3;
 import application.ControllerZad4;
+import application.ControllerZad5;
+import aproximation.Hermite;
 import functions.*;
 import interpolation.LaGrange;
 import view.XYSeriesDemo;
@@ -21,25 +23,21 @@ public class Main {
     }
 
     public static void main(String[] args) {
+//        for (int i=1; i<10; i++){
+//            for (int a : Hermite.getNthPolynomial(i)) {
+//                System.out.print(a + "\t");
+//            }
+//            System.out.println();
+//        }
+
 
 //        for (int i = 2; i <= 5; i+=2) {
 //            test(new FunctionCosine(), -10, 10, i);
 //        }
 //        test(new FunctionCosine(), -10, 10, 100);
+        ControllerZad5.startApp();
 
-        while (true) {
-            try {
-                ControllerZad1.startApp();
-            }
-            catch (RuntimeException e) {
-                System.out.println("Program ended by user");
 
-                System.out.println(e.getMessage());
-                System.out.println(e);
-                System.out.println(Arrays.toString(e.getStackTrace()));
-                return;
-            }
-        }
 
 //        while (true) {
 //            try {

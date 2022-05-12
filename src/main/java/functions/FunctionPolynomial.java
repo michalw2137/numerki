@@ -1,6 +1,6 @@
 package functions;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 
 public class FunctionPolynomial extends Function {
     private final int n;
@@ -18,6 +18,13 @@ public class FunctionPolynomial extends Function {
 
         this.n = n;
         this.coefficients = coefficients;
+    }
+
+    public FunctionPolynomial(int n, int [] coefficients, String formula) {
+        super(formula, -20, 20);
+
+        this.n = n;
+        this.coefficients = Arrays.stream(coefficients).asDoubleStream().toArray();
     }
 
     @Override

@@ -26,7 +26,7 @@ public class Simpson {
             sum *= h / 3;
             j ++;
         } while (abs(oldSum - sum) > epsilon);
-        System.out.println(j);
+//        System.out.println(j);
         return sum;
     }
 

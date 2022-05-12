@@ -14,6 +14,8 @@ import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import static java.lang.Math.round;
+
 public class Controller {
 
     private static final Scanner scanner = new Scanner(System.in);
@@ -111,14 +113,32 @@ public class Controller {
         }
     }
 
-    private static String makeFormula(int n, double[] coefficients) {
+
+    public static String makeFormula(int[] coefficients, int n) {
         StringBuilder formula = new StringBuilder();
         int i = 0;
         while (i <= n) {
             if (coefficients[i] > 0) {
                 formula.append("+");
             }
-            formula.append(coefficients[i])
+            formula.append(round(coefficients[i]))
+                    .append('x')
+                    .append("^")
+                    .append(n-i)
+                    .append(" ");
+            i++;
+        }
+        return formula.toString();
+    }
+
+    public static String makeFormula(int n, double[] coefficients) {
+        StringBuilder formula = new StringBuilder();
+        int i = 0;
+        while (i <= n) {
+            if (coefficients[i] > 0) {
+                formula.append("+");
+            }
+            formula.append(round(coefficients[i]))
                     .append('x')
                     .append("^")
                     .append(n-i)

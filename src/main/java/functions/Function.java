@@ -91,7 +91,7 @@ public abstract class Function {
         view.setVisible(true);
     }
 
-    static double horner(double[] poly, double x) {
+    public static double horner(double[] poly, double x) {
         double result = poly[0];
 
         for (int i = 1; i < poly.length; i++)
@@ -100,5 +100,13 @@ public abstract class Function {
         return result;
     }
 
+    public static double horner(int[] poly, double x) {
+        double result = poly[0];
+
+        for (int i = 1; i < poly.length; i++)
+            result = result * x + poly[i];
+
+        return result;
+    }
 
 }
