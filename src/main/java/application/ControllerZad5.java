@@ -62,6 +62,9 @@ public class ControllerZad5 {
         System.out.println();
         System.out.println();
 
+
+
+
         double[] solution = new double[n+1];
         for (int i=0; i<=n; i++) {
             for (int ii=0; ii<=n; ii++) {
@@ -74,7 +77,6 @@ public class ControllerZad5 {
 
             }
             //System.out.println();
-
         }
 
         for (double s: solution) {
