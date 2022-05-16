@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.stream.DoubleStream;
 
-public class Hermite {
+public class HermitePolynomials {
     private static final int[] H0 = new int[] {1};
     private static final int[] H1 = new int[] {2, 0};
     static ArrayList<int[]> polynomials = new ArrayList<>(){{
