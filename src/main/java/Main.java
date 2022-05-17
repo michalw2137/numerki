@@ -1,3 +1,4 @@
+import application.Controller;
 import application.ControllerZad3;
 import application.ControllerZad5;
 import functions.*;
@@ -16,8 +17,17 @@ public class Main {
 
     public static void main(String[] args) {
         while (true) {
-            ControllerZad5.setVariables();
-            ControllerZad5.doCalculations();
+            int choice = Controller.readInt("Select mode: \n -normal (1)\n -find polynomial (2): \n");
+            if (choice == 1) {
+                ControllerZad5.setVariables();
+                ControllerZad5.doCalculations();
+                ControllerZad5.showResults();
+            } else if (choice == 2) {
+                ControllerZad5.findPolynomial();
+            } else {
+                System.out.println("\nincorrect choice!\n");
+            }
+
         }
 
 
