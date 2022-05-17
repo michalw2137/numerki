@@ -4,6 +4,7 @@ import aproximation.HermitePolynomials;
 import functions.Function;
 import functions.FunctionPolynomial;
 import functions.FunctionQuadratic;
+import functions.differenceSquared;
 import integration.Hermite;
 import integration.Simpson;
 
@@ -70,17 +71,20 @@ public class ControllerZad5 {
                 } catch (ArrayIndexOutOfBoundsException ignored){}
 
             }
-            System.out.println(solution[n-i]);
+            System.out.println("c["+i+"] = "+solution[n-i]);
             System.out.println();
         }
 
-        for (double s: solution) {
-            System.out.println(s);
+        for (int i=0; i<=n; i++) {
+            System.out.println("c["+(n-i)+"] = " + solution[i]);
         }
 
         Function approximation = new FunctionPolynomial(n, solution, Controller.makeFormula(n, solution));
 
         Controller.graph2Functions(function, approximation, a, b);
+
+        double error = Simpson.integral(new differenceSquared(function, approximation), a, b, 0.001);
+        System.out.println("\nerror = " + error + "\n");
 
     }
 
