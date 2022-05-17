@@ -1,14 +1,6 @@
 package application;
 
-import functions.Function;
-import functions.FunctionCosine;
-import functions.FunctionExponential;
-import functions.FunctionLinear;
-import functions.FunctionModulo;
-import functions.FunctionPolynomial;
-import functions.FunctionQuadratic;
-import functions.FunctionSine;
-import functions.FunctionTangent;
+import functions.*;
 import interpolation.LaGrange;
 import view.XYSeriesDemo;
 
@@ -40,7 +32,7 @@ public class Controller {
         var exponential = new FunctionExponential();
         var sine = new FunctionSine();
         var cosine = new FunctionCosine();
-        var tangent = new FunctionTangent();
+        var cosine2 = new FunctionCosine2();
         var linear = new FunctionLinear();
         var modulo = new FunctionModulo();
         var quadratic = new FunctionQuadratic();
@@ -54,7 +46,7 @@ public class Controller {
 
                         "5) " + sine.getFormula() + "\n" +
                         "6) " + cosine.getFormula() + "\n" +
-                        "7) " + tangent.getFormula()  + "\n" +
+                        "7) " + cosine2.getFormula()  + "\n" +
 
                         "8) " + exponential.getFormula() + "\n" +
                         "9) custom polynomial" + "\n" +
@@ -83,7 +75,7 @@ public class Controller {
                     return cosine;
                 }
                 case 7 -> {
-                    return tangent;
+                    return cosine2;
                 }
                 case 8 -> {
                     return exponential;

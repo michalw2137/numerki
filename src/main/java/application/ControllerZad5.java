@@ -97,7 +97,7 @@ public class ControllerZad5 {
             System.out.println();
         }
         System.out.print("\nerror = ");
-        System.out.printf("%10.15s", error);
+        System.out.printf("%.10f", error);
         System.out.println("\n");
         System.out.println("==================================================================================================");
 
@@ -118,7 +118,9 @@ public class ControllerZad5 {
         do {
             n++;
             doCalculations();
-            System.out.println("n="+n+"\t,\t E = "+error);
+            System.out.print("n="+n+"\t,\t E = ");
+            System.out.printf("%.10f", error);
+            System.out.println();
         } while (error > epsilon);
 
         if (Double.isNaN(error)) {
