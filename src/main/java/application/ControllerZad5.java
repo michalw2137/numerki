@@ -56,13 +56,13 @@ public class ControllerZad5 {
             c[k] = ak;
         }
 
-//        System.out.println();
-//        for(int i = 0; i <= n; i++) {
-//            System.out.print("factor = ");
-//            System.out.printf("%10.8s", c[i]+',');
-//            System.out.println("\t\t Hermite polynomial: "+ Arrays.toString(HermitePolynomials.getNthPolynomial(i)));
-//        }
-//        System.out.println();
+        System.out.println();
+        for(int i = 0; i <= n; i++) {
+            System.out.print("factor = ");
+            System.out.printf("%10.8s", c[i]+',');
+            System.out.println("\t\t Hermite polynomial: "+ Arrays.toString(HermitePolynomials.getNthPolynomial(i)));
+        }
+        System.out.println();
 
 
 // ==================================================================================================================================
@@ -73,15 +73,15 @@ public class ControllerZad5 {
                     double p = HermitePolynomials.getNthPolynomial(ii)[ii-i];
                     double ci = c[ii];
                     solution[n-i] += p * ci;
-//                    System.out.print("H"+ii+" ["+(ii-i)+"] = "+p+"\t\t");
-//                    System.out.print("ci = " + ci+"\t\t");
-//                    System.out.print("H*ci = " + p * ci);
-//                    System.out.println();
+                    System.out.print("H"+ii+" ["+(ii-i)+"] = "+p+"\t\t");
+                    System.out.print("ci = " + ci+"\t\t");
+                    System.out.print("H*ci = " + p * ci);
+                    System.out.println();
                 } catch (ArrayIndexOutOfBoundsException ignored){}
 
             }
-//            System.out.println("c["+i+"] = "+solution[n-i]);
-//            System.out.println();
+            System.out.println("c["+i+"] = "+solution[n-i]);
+            System.out.println();
         }
 
         approximation = new FunctionPolynomial(n, solution, Controller.makeFormula(n, solution));
